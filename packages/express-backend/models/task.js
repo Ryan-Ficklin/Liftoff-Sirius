@@ -8,7 +8,7 @@
 
 import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema(
+const TaskSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -30,9 +30,9 @@ const UserSchema = new mongoose.Schema(
         default: 1,
     },
   },
-  { collection: "users_list" }
+  { collection: "tasks_list" }
 );
 
-const User = mongoose.model("User", UserSchema);
+const Task = mongoose.model("Task", TaskSchema);
 
-export default User;
+export default Task;
