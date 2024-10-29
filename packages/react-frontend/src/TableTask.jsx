@@ -9,8 +9,12 @@ function TableTask(props){
                 <div id = "TableTaskTopDate">{task.date}</div>
                 <div id = "TableTaskTopPriority">{task.priority}</div>
             </div>
-            <p>{task.description}</p>
-            <button className = "TableTaskButton"> View </button>
+            <p id = "TableTaskDescription">{task.description}</p>
+            <button 
+                className = "TableTaskButton"
+                onClick={() => props.removeTask(props.index)}>
+                    Delete
+            </button>
          </div>
     );
 }

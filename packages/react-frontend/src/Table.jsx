@@ -14,8 +14,11 @@ function TableHeader() {
 function TableBody(props) {
     const tasks = props.taskData.map((row, index) => {
         return (
-            <div key={index}>
-                <TableTask task={row}/>
+            <div>
+                <TableTask 
+                    task={row} 
+                    removeTask={props.removeTask}
+                    index={index}/>
             </div>
         );
     });
@@ -30,7 +33,10 @@ function Table(props){
     return(
         <table className = "TaskTable">
             <TableHeader />
-            <TableBody taskData={props.taskData} />
+            <TableBody 
+                taskData={props.taskData}
+                removeTask={props.removeTask}
+            />
         </table>
     );
 }
