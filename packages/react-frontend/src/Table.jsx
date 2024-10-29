@@ -11,20 +11,26 @@ function TableHeader() {
     );
 }
 
-function TableBody() {
+function TableBody(props) {
+    const tasks = props.taskData.map((row, index) => {
+        return (
+            <div key={index}>
+                <TableTask task={row}/>
+            </div>
+        );
+    });
     return (
-        <tbody>
-            <TableTask />
-            <TableTask />
-        </tbody>
+        <div>
+            {tasks}
+        </div>
     );
 }
 
-function Table(){
+function Table(props){
     return(
-        <table>
+        <table className = "TaskTable">
             <TableHeader />
-            <TableBody />
+            <TableBody taskData={props.taskData} />
         </table>
     );
 }

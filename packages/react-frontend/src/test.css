@@ -1,0 +1,41 @@
+.TaskTable {
+    align: center;
+    background-color: red;
+    padding: auto;
+    margin: auto;
+    width: 25%;
+}
+
+.TableTask{
+    display: block;
+    align: center;
+    background-color: blue;
+    width: auto;
+    padding: auto;
+    margin: 5%;
+}
+
+.TableTaskTop {
+    background-color: yellow;
+    display: flex;
+    margin: auto;
+    padding: auto;
+}
+
+.TableTaskTop > div{
+    margin-left: 3%;
+}
+
+#TableTaskTopDate{
+    align: right;
+}
+
+#TableTaskTopPriority{
+    align: right;
+    padding: 1%;
+    background-color: purple;
+}
+
+.TaskTableButton {
+    align: right;
+}
