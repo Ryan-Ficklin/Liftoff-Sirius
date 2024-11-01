@@ -155,10 +155,10 @@ app.post("/tasks", async (req, res) => {
   const taskToAdd = req.body;
   const addedTask = addTask(taskToAdd);
   try {
-    const addedTask = await userService.addTask(taskToAdd);
+    const addedTask = await taskService.addTask(taskToAdd);
     res.status(201).json(addedTask);
   } catch (error) {
-    res.status(500).send("Error adding user: " + error.message);
+    res.status(500).send("Error adding task: " + error.message);
   }
 });
 
@@ -177,16 +177,16 @@ app.delete("/users/:username", async (req, res) => {
 });
 
 app.delete("/tasks/:name", async (req, res) => {
-  const username = req.params["name"];
+  const name = req.params["name"];
   try {
-    const result = await userService.deleteUser(name);
+    const result = await taskService.deleteTask(name);
     if (!result) {
-      res.status(404).send("User not found.");
+      res.status(404).send("Task not found.");
     } else {
       res.sendStatus(204);
     }
   } catch (error) {
-    res.status(500).send("Error deleting user: " + error.message);
+    res.status(500).send("Error deleting task: " + error.message);
   }
 });
 
