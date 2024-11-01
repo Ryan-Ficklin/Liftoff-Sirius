@@ -70,7 +70,7 @@ app.get("/tasks", async (req, res) => {
   }
 });
 
-app.get("/users/:username", async (req, res) => {
+/*app.get("/users/:username", async (req, res) => {
   const username = req.params["username"];
   try {
     const result = await userService.findUserByUsername(username);
@@ -96,9 +96,23 @@ app.get("/users/:task_list", async (req, res) => {
   } catch (error) {
     res.status(500).send("Error fetching user: " + error.message);
   }
+});*/
+
+app.get("/tasks/:id", async (req, res) => {
+  const id = req.params["id"];
+  try {
+    const result = await taskService.findTaskByID(id);
+    if (!result) {
+      res.status(404).send("Resource not found.");
+    } else {
+      res.status(200).json(result);
+    }
+  } catch (error) {
+    res.status(500).send("Error fetching task: " + error.message);
+  }
 });
 
-app.get("/tasks/:name", async (req, res) => {
+/*app.get("/tasks/:name", async (req, res) => {
   const name = req.params["name"];
   try {
     const result = await userService.findTaskByName(name);
@@ -124,7 +138,7 @@ app.get("/tasks/:priority", async (req, res) => {
   } catch (error) {
     res.status(500).send("Error fetching user: " + error.message);
   }
-});
+});*/
 
 app.post("/users", async (req, res) => {
   const userToAdd = req.body;

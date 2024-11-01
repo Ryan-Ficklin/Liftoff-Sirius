@@ -16,6 +16,12 @@ function getTasks(name, description, due_date_time, priority) {
   return promise;
 }
 
+function findTaskByID(id) {
+  let promise;
+  promise = taskModel.findById(id);
+  return promise;
+}
+
 function addTask(task) {
   const taskToAdd = new taskModel(task);
   const promise = taskToAdd.save();
@@ -41,4 +47,5 @@ export default {
   findTaskByName,
   findTaskByPriority,
   deleteTask,
+  findTaskByID
 };
