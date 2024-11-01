@@ -46,11 +46,11 @@ app.use(express.json());
 
 app.get("/users", async (req, res) => {
   const username = req.query.username;
-  const password = req.query.password;
-  const task_list = req.query.task_list;
+  // const password = req.query.password;
+  // const task_list = req.query.task_list;
   const email = req.query.email;
   try {
-    const users = await userService.getUsers(username, password, task_list, email);
+    const users = await userService.getUsers(username, email);
     res.status(200).json({ users_list: users });
   } catch (error) {
     res.status(500).send("Error fetching users: " + error.message);

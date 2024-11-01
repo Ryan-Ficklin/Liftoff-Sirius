@@ -10,9 +10,17 @@ mongoose.set("debug", true);
   })
   .catch((error) => console.log(error));*/
 
-function getUsers(username, password, task_list, email) {
+function getUsers(username, email) {
   let promise;
-  promise = userModel.find();
+  if (username === undefined && email === undefined) {
+    promise = userModel.find();
+  } else if (username && !email) {
+    promise = findUserByUsername(username)
+  } else if (!username && email) {
+    promise = findUserByEmail(email)
+  } else {
+    promise = findUserByUsernameAndEmail(username, email)
+  }
   return promise;
 }
 
@@ -32,6 +40,14 @@ function findUserByUsername(username) {
 
 function findUserByTask(task_list) {
   return userModel.find({ task_list: task_list });
+}
+
+function findUserByEmail(email) {
+  return userModel.find({ email: email });
+}
+
+function findUserByUsernameAndEmail(username, email) {
+  return userModel.find({ username: username, email: email })
 }
 
 
