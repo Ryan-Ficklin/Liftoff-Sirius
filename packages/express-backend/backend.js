@@ -142,7 +142,7 @@ app.get("/tasks/:priority", async (req, res) => {
 
 app.post("/users", async (req, res) => {
   const userToAdd = req.body;
-  const addedUser = addUser(userToAdd);
+  //const addedUser = addUser(userToAdd);
   try {
     const addedUser = await userService.addUser(userToAdd);
     res.status(201).json(addedUser);

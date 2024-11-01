@@ -1,42 +1,33 @@
-import React, { useState } from "react";
-import Table from "./Table.jsx";
-import Form from "./Form";
+// App.js
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import TasksPage from "./pages/TasksPage";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage"
+import { PrimeReactProvider } from "primereact/api";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+import { Toast } from 'primereact/toast';
+import { useRef } from 'react';
 
 function App() {
-    const [tasks, setTasks] = useState([
-        {
-            tname: "TE1",
-            priority: "1",
-            description: "Description 1",
-            dueDate: "10/28/2024"
-        },
-        {
-            tname: "TE2",
-            priority: "2",
-            description: "Description 2",
-            dueDate: "10/31/2024"
-        }
-    ]);
-    
-    function removeOneTask(index){
-        const updated = tasks.filter((task, i) => {
-            return i !== index;
-        });
-        setTasks(updated);
-    }
+    const toast = useRef(null);
 
-    function updateList(task) {
-        setTasks([...tasks, task]);
-    }
+    const showToast = (severity, summary, detail) => {
+        toast.current.show({ severity, summary, detail });
+    };
+
 
     return (
-        <div className ="container">
-            <Table 
-                taskData={tasks}
-                removeTask={removeOneTask}
-            />
-            <Form handleSubmit={updateList}/>
-        </div>
+        <PrimeReactProvider>
+            <Toast ref={toast} />
+            <Router>
+                <Routes>
+                    <Route path="/tasks" element={<TasksPage />} />
+                    <Route path="/login" element={<LoginPage showToast={showToast}/>} />
+                    <Route path="/signup" element={<SignUpPage showToast={showToast}/>} />
+                </Routes>
+            </Router>
+        </PrimeReactProvider>
     );
 }
+
 export default App;
