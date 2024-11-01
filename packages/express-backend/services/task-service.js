@@ -23,11 +23,11 @@ function addTask(task) {
 }
 
 function findTaskByName(name) {
-  return userModel.find({ name: name });
+  return taskModel.find({ name: name });
 }
 
 function findTaskByPriority(priority) {
-  return userModel.find({ priority: priority });
+  return taskModel.find({ priority: priority });
 }
 
 const deleteTask = (name) => {
