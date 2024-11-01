@@ -3,12 +3,12 @@ import taskModel from "../models/task.js";
 
 mongoose.set("debug", true);
 
-mongoose
+/*mongoose
   .connect("mongodb://localhost:27017/tasks", {
     //useNewUrlParser: true,
     //useUnifiedTopology: true,
   })
-  .catch((error) => console.log(error));
+  .catch((error) => console.log(error));*/
 
 function getTasks(name, description, due_date_time, priority) {
   let promise;
@@ -36,7 +36,7 @@ const deleteTask = (name) => {
 
 
 export default {
-  addUser,
+  addTask,
   getTasks,
   findTaskByName,
   findTaskByPriority,

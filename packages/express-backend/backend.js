@@ -5,8 +5,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
-import userService from "./models/user.js";
-import taskService from "./models/task.js";
+import userService from "./services/user-service.js";
+import taskService from "./services/task-service.js";
 
 dotenv.config();
 
@@ -63,10 +63,10 @@ app.get("/tasks", async (req, res) => {
   const due_date_time = req.query.due_date_time;
   const priority = req.query.priority
   try {
-    const users = await taskService.getTasks(name, description, due_date_time, priority);
+    const tasks = await taskService.getTasks(name, description, due_date_time, priority);
     res.status(200).json({ tasks_list: tasks });
   } catch (error) {
-    res.status(500).send("Error fetching users: " + error.message);
+    res.status(500).send("Error fetching tasks: " + error.message);
   }
 });
 

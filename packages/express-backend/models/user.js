@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema(
       trim: true,
     },
     task_list: {
-        type: [ObjectId],
+        type: [mongoose.ObjectId],
         required: true,
     },
     email: {
