@@ -11,6 +11,7 @@
     background-color: #1B1550;
     margin-top: 1rem;
     width: 23vw;
+    min-width: 23rem;
 }
 
 .login-tag{
@@ -34,7 +35,6 @@
     color: white;
     font-weight: 600;
     margin-left: 5%;
-    margin-top: 1rem;
 }
 
 .signup{
@@ -45,7 +45,7 @@
     cursor: pointer;
 }
 
-.login-btn{
+.signup-btn{
     padding-block: 0.4rem;
     background-color: #147FFF;
     color: white;
@@ -56,10 +56,15 @@
     transition: 0.4s;
 }
 
-.login-btn:hover{
+.signup-btn:hover{
     background-color: #4790ea;
 }
 
 a{
     text-decoration: none;
+}
+.signup-btn:disabled {
+    background-color: #4790ea;  /* Gray background */
+    cursor: not-allowed;     /* Show not-allowed cursor */
+    opacity: 0.6;            /* Make it appear semi-transparent */
 }
