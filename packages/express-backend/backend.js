@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 
 import userService from "./services/user-service.js";
 import taskService from "./services/task-service.js";
+import auth from "./auth.js"
 
 dotenv.config();
 
@@ -140,7 +141,7 @@ app.get("/tasks/:priority", async (req, res) => {
   }
 });*/
 
-app.post("/users", async (req, res) => {
+app.post("/users", auth.authenticateUser, async (req, res) => {
   const userToAdd = req.body;
   //const addedUser = addUser(userToAdd);
   try {
@@ -150,6 +151,10 @@ app.post("/users", async (req, res) => {
     res.status(500).send("Error adding user: " + error.message);
   }
 });
+
+app.post("/signup", auth.registerUser);
+
+app.post("/login", auth.loginUser);
 
 app.post("/tasks", async (req, res) => {
   const taskToAdd = req.body;
