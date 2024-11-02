@@ -69,18 +69,16 @@ export function authenticateUser(req, res, next) {
     }
 }
 
-export function loginUser(req, res) {
-    const { username, pwd } = req.body; // from form
-    const retrievedUser = creds.find(
-      (c) => c.username === username
-    );
+export async function loginUser(req, res) {
+    const { username, password } = req.body; // from form
+    const retrievedUser = await userService.findUserByUsername(username)
   
     if (!retrievedUser) {
       // invalid username
       res.status(401).send("Unauthorized");
     } else {
       bcrypt
-        .compare(pwd, retrievedUser.hashedPassword)
+        .compare(password, retrievedUser.password)
         .then((matched) => {
           if (matched) {
             generateAccessToken(username).then((token) => {

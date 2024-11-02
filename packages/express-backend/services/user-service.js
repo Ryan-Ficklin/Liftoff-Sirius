@@ -35,7 +35,7 @@ const deleteUser = (username) => {
 }
 
 function findUserByUsername(username) {
-  return userModel.find({ username: username });
+  return userModel.findOne({ username: username });
 }
 
 function findUserByTask(task_list) {
