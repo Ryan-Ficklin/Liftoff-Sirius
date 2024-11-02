@@ -11,41 +11,40 @@ mongoose.set("debug", true);
   .catch((error) => console.log(error));*/
 
 function getTasks(name, description, due_date_time, priority) {
-  let promise;
-  promise = taskModel.find();
-  return promise;
+    let promise;
+    promise = taskModel.find();
+    return promise;
 }
 
 function findTaskByID(id) {
-  let promise;
-  promise = taskModel.findById(id);
-  return promise;
+    let promise;
+    promise = taskModel.findById(id);
+    return promise;
 }
 
 function addTask(task) {
-  const taskToAdd = new taskModel(task);
-  const promise = taskToAdd.save();
-  return promise;
+    const taskToAdd = new taskModel(task);
+    const promise = taskToAdd.save();
+    return promise;
 }
 
 function findTaskByName(name) {
-  return taskModel.find({ name: name });
+    return taskModel.find({ name: name });
 }
 
 function findTaskByPriority(priority) {
-  return taskModel.find({ priority: priority });
+    return taskModel.find({ priority: priority });
 }
 
 const deleteTask = (name) => {
-    findOneandDelete({name: name});
-}
-
+    findOneandDelete({ name: name });
+};
 
 export default {
-  addTask,
-  getTasks,
-  findTaskByName,
-  findTaskByPriority,
-  deleteTask,
-  findTaskByID
+    addTask,
+    getTasks,
+    findTaskByName,
+    findTaskByPriority,
+    deleteTask,
+    findTaskByID
 };

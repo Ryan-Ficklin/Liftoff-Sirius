@@ -15,28 +15,18 @@ function TableBody(props) {
     const tasks = props.taskData.map((row, index) => {
         return (
             <div>
-                <TableTask 
-                    task={row} 
-                    removeTask={props.removeTask}
-                    index={index}/>
+                <TableTask task={row} removeTask={props.removeTask} index={index} />
             </div>
         );
     });
-    return (
-        <div>
-            {tasks}
-        </div>
-    );
+    return <div>{tasks}</div>;
 }
 
-function Table(props){
-    return(
-        <table className = "TaskTable">
+function Table(props) {
+    return (
+        <table className="TaskTable">
             <TableHeader />
-            <TableBody 
-                taskData={props.taskData}
-                removeTask={props.removeTask}
-            />
+            <TableBody taskData={props.taskData} removeTask={props.removeTask} />
         </table>
     );
 }

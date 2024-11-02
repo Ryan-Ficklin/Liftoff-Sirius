@@ -17,8 +17,8 @@ function TasksPage() {
             dueDate: "10/31/2024"
         }
     ]);
-    
-    function removeOneTask(index){
+
+    function removeOneTask(index) {
         const updated = tasks.filter((task, i) => {
             return i !== index;
         });
@@ -30,12 +30,9 @@ function TasksPage() {
     }
 
     return (
-        <div className ="container">
-            <Table 
-                taskData={tasks}
-                removeTask={removeOneTask}
-            />
-            <Form handleSubmit={updateList}/>
+        <div className="container">
+            <Table taskData={tasks} removeTask={removeOneTask} />
+            <Form handleSubmit={updateList} />
         </div>
     );
 }

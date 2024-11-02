@@ -2,8 +2,8 @@ import logo from "../assets/sirius-logo.svg";
 import "../SignUpPage.css";
 import { InputText } from "primereact/inputtext";
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function LoginPage({ showToast }) {
     const [username, setUsername] = useState("");
@@ -12,51 +12,52 @@ function LoginPage({ showToast }) {
     const [btnEnabled, setBtnEnabled] = useState(true);
     const navigate = useNavigate();
 
-    function signup(){
-        setBtnEnabled(false)
-        if(username !== '' && password !== '' && email !== ''){
-
+    function signup() {
+        setBtnEnabled(false);
+        if (username !== "" && password !== "" && email !== "") {
             // User object
             let user = {
-                "username": username,
-                "password": password,
-                "email": email,
-                "task_list": [],
-            }
-            console.log('works')
+                username: username,
+                password: password,
+                email: email,
+                task_list: []
+            };
+            console.log("works");
 
             // Backend call
-            fetch("http://localhost:8000/users",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"  // Specify JSON format
-                    },
-                    body: JSON.stringify(user)
-                }
-            ).then(res => {
-                console.log(res)
-                if(res.status != 201){
-                    showToast('error', 'Error', 'Failed');
-                    return undefined;
-                } else {
-                    return res.json()
-                }
+            fetch("http://localhost:8000/users", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json" // Specify JSON format
+                },
+                body: JSON.stringify(user)
             })
-            .then(data => {
-                setBtnEnabled(true)
-                console.log(data)
-                showToast('success', 'User created!', `The user ${username} was successfully created!`);
-                navigate('/login');
-
-            })
-            .catch((error) => {
-                setBtnEnabled(true)
-                //toast.current.show({ severity: 'error', summary: 'Error', detail: 'Failed: ' + error });
-                console.log(error)
-            })
+                .then((res) => {
+                    console.log(res);
+                    if (res.status != 201) {
+                        showToast("error", "Error", "Failed");
+                        return undefined;
+                    } else {
+                        return res.json();
+                    }
+                })
+                .then((data) => {
+                    setBtnEnabled(true);
+                    console.log(data);
+                    showToast(
+                        "success",
+                        "User created!",
+                        `The user ${username} was successfully created!`
+                    );
+                    navigate("/login");
+                })
+                .catch((error) => {
+                    setBtnEnabled(true);
+                    //toast.current.show({ severity: 'error', summary: 'Error', detail: 'Failed: ' + error });
+                    console.log(error);
+                });
         } else {
-            setBtnEnabled(true)
+            setBtnEnabled(true);
             //toast.current.show({ severity: 'warn', summary: 'Error', detail: 'One or more fields are left blank' });
         }
     }
@@ -106,7 +107,12 @@ function LoginPage({ showToast }) {
                             <p className="signup">Already have an account? Login</p>
                         </a>
 
-                        <button className="signup-btn" onClick={signup} disabled={!btnEnabled}>Sign Up</button>
+                        <button
+                            className="signup-btn"
+                            onClick={signup}
+                            disabled={!btnEnabled}>
+                            Sign Up
+                        </button>
                     </div>
                 </div>
             </div>
@@ -116,6 +122,6 @@ function LoginPage({ showToast }) {
 
 // Validate the props
 LoginPage.propTypes = {
-    showToast: PropTypes.func.isRequired,  // expects a function
+    showToast: PropTypes.func.isRequired // expects a function
 };
 export default LoginPage;
