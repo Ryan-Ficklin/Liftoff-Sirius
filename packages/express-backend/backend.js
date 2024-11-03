@@ -156,6 +156,10 @@ app.post("/signup", auth.registerUser);
 
 app.post("/login", auth.loginUser);
 
+app.post("/checkAuth", async (req, res) => {
+  auth.authenticateUser(req, res, () => {res.status(200).send()})
+})
+
 app.post("/tasks", async (req, res) => {
   const taskToAdd = req.body;
   const addedTask = addTask(taskToAdd);
