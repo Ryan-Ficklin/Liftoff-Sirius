@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Table from "../Table.jsx";
 import Form from "../Form.jsx";
+import { useNavigate } from "react-router-dom";
 
 function TasksPage() {
+    let navigate = useNavigate();
     const [tasks, setTasks] = useState([
         {
             tname: "TE1",
@@ -18,6 +20,27 @@ function TasksPage() {
         }
     ]);
 
+    function checkUserAuth(){
+        const token = localStorage.getItem("token");  
+        if(!token){
+            navigate("/login")
+        } else {
+            fetch("http://localhost:8000/checkAuth", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json" // Specify JSON format
+                },
+                body: JSON.stringify({"authorization": `Bearer ${token}`})
+            })
+                .then((res) => {
+                    console.log(res);
+                    if (res.status != 200) {
+                        navigate("/login")
+                    }
+                })
+        }
+    }
+
     function removeOneTask(index) {
         const updated = tasks.filter((task, i) => {
             return i !== index;
@@ -28,6 +51,10 @@ function TasksPage() {
     function updateList(task) {
         setTasks([...tasks, task]);
     }
+
+    useEffect(() => {
+        checkUserAuth();
+    })
 
     return (
         <div className="container">
