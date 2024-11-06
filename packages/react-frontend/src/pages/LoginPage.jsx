@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-function LoginPage({showToast}) {
+function LoginPage({ showToast }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [btnEnabled, setBtnEnabled] = useState(true);
@@ -17,7 +17,7 @@ function LoginPage({showToast}) {
             // User object
             let user = {
                 username: username,
-                password: password,
+                password: password
             };
             console.log("works");
 
@@ -40,21 +40,21 @@ function LoginPage({showToast}) {
                 })
                 .then((data) => {
                     setBtnEnabled(true);
-                    if(data){
+                    if (data) {
                         console.log(data);
-                        let token = data['token'];
+                        let token = data["token"];
                         localStorage.setItem("token", token);
                         navigate("/tasks");
                     }
                 })
                 .catch((error) => {
                     setBtnEnabled(true);
-                    showToast('error', 'Error', 'Failed: ' + error );
+                    showToast("error", "Error", "Failed: " + error);
                     console.log(error);
                 });
         } else {
             setBtnEnabled(true);
-            showToast('warn', 'Error', 'One or more fields are left blank');
+            showToast("warn", "Error", "One or more fields are left blank");
         }
     }
 
@@ -94,7 +94,12 @@ function LoginPage({showToast}) {
                             <p className="signup">Don&apos;t have an account? Sign up</p>
                         </a>
 
-                        <button className="login-btn" onClick={login} disabled={!btnEnabled}>Login</button>
+                        <button
+                            className="login-btn"
+                            onClick={login}
+                            disabled={!btnEnabled}>
+                            Login
+                        </button>
                     </div>
                 </div>
             </div>

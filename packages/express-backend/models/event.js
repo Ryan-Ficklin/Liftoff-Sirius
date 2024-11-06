@@ -24,7 +24,7 @@ const EventSchema = new mongoose.Schema(
         end_date_time: {
             type: Date,
             required: true
-        },
+        }
     },
     { collection: "events_list" }
 );

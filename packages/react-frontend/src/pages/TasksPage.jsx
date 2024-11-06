@@ -20,24 +20,23 @@ function TasksPage() {
         }
     ]);
 
-    function checkUserAuth(){
-        const token = localStorage.getItem("token");  
-        if(!token){
-            navigate("/login")
+    function checkUserAuth() {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            navigate("/login");
         } else {
             fetch("http://localhost:8000/checkAuth", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json" // Specify JSON format
                 },
-                body: JSON.stringify({"authorization": `Bearer ${token}`})
-            })
-                .then((res) => {
-                    console.log(res);
-                    if (res.status != 200) {
-                        navigate("/login")
-                    }
-                })
+                body: JSON.stringify({ authorization: `Bearer ${token}` })
+            }).then((res) => {
+                console.log(res);
+                if (res.status != 200) {
+                    navigate("/login");
+                }
+            });
         }
     }
 
@@ -54,7 +53,7 @@ function TasksPage() {
 
     useEffect(() => {
         checkUserAuth();
-    })
+    });
 
     return (
         <div className="container">
