@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 
 import userService from "./services/user-service.js";
 import taskService from "./services/task-service.js";
+import eventService from "./services/event-service.js";
 import auth from "./auth.js"
 
 dotenv.config();
@@ -68,6 +69,19 @@ app.get("/tasks", async (req, res) => {
     res.status(200).json({ tasks_list: tasks });
   } catch (error) {
     res.status(500).send("Error fetching tasks: " + error.message);
+  }
+});
+
+app.get("/events", async (req, res) => {
+  const name = req.query.name;
+  const description = req.query.description;
+  const due_date_time = req.query.due_date_time;
+  const priority = req.query.priority
+  try {
+    const events = await eventService.getEvents(name, description, due_date_time, priority);
+    res.status(200).json({ events_list: events });
+  } catch (error) {
+    res.status(500).send("Error fetching events: " + error.message);
   }
 });
 
