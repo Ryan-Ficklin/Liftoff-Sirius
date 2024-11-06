@@ -127,6 +127,20 @@ app.get("/tasks/:id", async (req, res) => {
   }
 });
 
+app.get("/events/:id", async (req, res) => {
+  const id = req.params["id"];
+  try {
+    const result = await eventService.findEventByID(id);
+    if (!result) {
+      res.status(404).send("Resource not found.");
+    } else {
+      res.status(200).json(result);
+    }
+  } catch (error) {
+    res.status(500).send("Error fetching event: " + error.message);
+  }
+});
+
 /*app.get("/tasks/:name", async (req, res) => {
   const name = req.params["name"];
   try {
@@ -176,12 +190,23 @@ app.post("/checkAuth", async (req, res) => {
 
 app.post("/tasks", async (req, res) => {
   const taskToAdd = req.body;
-  const addedTask = addTask(taskToAdd);
+  // const addedTask = addTask(taskToAdd);
   try {
     const addedTask = await taskService.addTask(taskToAdd);
     res.status(201).json(addedTask);
   } catch (error) {
     res.status(500).send("Error adding task: " + error.message);
+  }
+});
+
+app.post("/events", async (req, res) => {
+  const eventToAdd = req.body;
+  // const addedEvent = addEvent(eventToAdd);
+  try {
+    const addedEvent = await eventService.addEvent(eventToAdd);
+    res.status(201).json(addedEvent);
+  } catch (error) {
+    res.status(500).send("Error adding event: " + error.message);
   }
 });
 
@@ -210,6 +235,20 @@ app.delete("/tasks/:name", async (req, res) => {
     }
   } catch (error) {
     res.status(500).send("Error deleting task: " + error.message);
+  }
+});
+
+app.delete("/events/:id", async (req, res) => {
+  const id = req.params["id"];
+  try {
+    const result = await eventService.deleteEvent(id);
+    if (!result) {
+      res.status(404).send("Event not found.");
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (error) {
+    res.status(500).send("Error deleting event: " + error.message);
   }
 });
 

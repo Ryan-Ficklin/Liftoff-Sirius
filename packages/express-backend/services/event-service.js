@@ -36,9 +36,13 @@ function findEventByPriority(priority) {
     return eventModel.find({ priority: priority });
 }
 
-const deleteEvent = (name) => {
-    findOneandDelete({ name: name });
-};
+/*const deleteEvent = (name) => {
+    eventModel.findOneandDelete({ name: name });
+};*/
+
+function deleteEvent(id) {
+    return eventModel.findByIdAndDelete(id);
+}
 
 export default {
     addEvent,
