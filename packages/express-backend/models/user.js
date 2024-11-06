@@ -23,6 +23,10 @@ const UserSchema = new mongoose.Schema(
         type: [mongoose.ObjectId],
         required: true,
     },
+    event_list: {
+        type: [mongoose.ObjectId],
+        required: true,
+    },
     email: {
         type: String,
         required: true,
