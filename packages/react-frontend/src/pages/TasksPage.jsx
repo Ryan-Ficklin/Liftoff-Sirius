@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import Table from "../Table.jsx";
 import Form from "../Form.jsx";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function TasksPage() {
+function TasksPage({ addAuthHeader }) {
     let navigate = useNavigate();
     const [tasks, setTasks] = useState([
         {
@@ -62,4 +63,10 @@ function TasksPage() {
         </div>
     );
 }
+
+// Validate the props
+TasksPage.propTypes = {
+    addAuthHeader: PropTypes.func.isRequired // expects a function
+};
+
 export default TasksPage;
