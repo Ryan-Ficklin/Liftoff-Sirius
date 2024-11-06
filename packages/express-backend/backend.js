@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 
 import userService from "./services/user-service.js";
 import taskService from "./services/task-service.js";
-import auth from "./auth.js"
+import auth, { authenticateUser } from "./auth.js"
 
 dotenv.config();
 
@@ -45,7 +45,7 @@ const generateID = () => {
 app.use(cors());
 app.use(express.json());
 
-app.get("/users", async (req, res) => {
+app.get("/users", authenticateUser, async (req, res) => {
   const username = req.query.username;
   // const password = req.query.password;
   // const task_list = req.query.task_list;
@@ -58,7 +58,7 @@ app.get("/users", async (req, res) => {
   }
 });
 
-app.get("/tasks", async (req, res) => {
+app.get("/tasks", authenticateUser, async (req, res) => {
   const name = req.query.name;
   const description = req.query.description;
   const due_date_time = req.query.due_date_time;
@@ -99,7 +99,7 @@ app.get("/users/:task_list", async (req, res) => {
   }
 });*/
 
-app.get("/tasks/:id", async (req, res) => {
+app.get("/tasks/:id", authenticateUser, async (req, res) => {
   const id = req.params["id"];
   try {
     const result = await taskService.findTaskByID(id);
@@ -160,7 +160,7 @@ app.post("/checkAuth", async (req, res) => {
   auth.authenticateUser(req, res, () => {res.status(200).send()})
 })
 
-app.post("/tasks", async (req, res) => {
+app.post("/tasks", authenticateUser, async (req, res) => {
   const taskToAdd = req.body;
   const addedTask = addTask(taskToAdd);
   try {
@@ -171,7 +171,7 @@ app.post("/tasks", async (req, res) => {
   }
 });
 
-app.delete("/users/:username", async (req, res) => {
+app.delete("/users/:username", authenticateUser, async (req, res) => {
   const username = req.params["username"];
   try {
     const result = await userService.deleteUser(username);
@@ -185,7 +185,7 @@ app.delete("/users/:username", async (req, res) => {
   }
 });
 
-app.delete("/tasks/:name", async (req, res) => {
+app.delete("/tasks/:name", authenticateUser, async (req, res) => {
   const name = req.params["name"];
   try {
     const result = await taskService.deleteTask(name);
