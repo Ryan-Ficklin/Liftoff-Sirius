@@ -3,9 +3,13 @@ import Table from "../Table.jsx";
 import Form from "../Form.jsx";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { SelectButton } from 'primereact/selectbutton';
 
 function TasksPage({addAuthHeader}) {
     let navigate = useNavigate();
+    const options = ['List View', 'Calendar View'];
+    const [value, setValue] = useState(options[0]);
+
     const [tasks, setTasks] = useState([
         {
             tname: "TE1",
@@ -59,6 +63,9 @@ function TasksPage({addAuthHeader}) {
 
     return (
         <div className="container">
+            <div className="d-flex justify-content-end select">
+                <SelectButton value={value} onChange={(e) => setValue(e.value)} options={options} />
+            </div>
             <Table taskData={tasks} removeTask={removeOneTask} />
             <Form handleSubmit={updateList} />
         </div>
