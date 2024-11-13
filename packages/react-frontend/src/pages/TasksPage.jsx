@@ -3,9 +3,16 @@ import Table from "../Table.jsx";
 import Form from "../Form.jsx";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { SelectButton } from "primereact/selectbutton";
+import "../TasksPage.css";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 
 function TasksPage({ addAuthHeader }) {
     let navigate = useNavigate();
+    const options = ["List View", "Calendar View"];
+    const [value, setValue] = useState(options[0]);
+
     const [tasks, setTasks] = useState([
         {
             tname: "TE1",
@@ -58,8 +65,35 @@ function TasksPage({ addAuthHeader }) {
 
     return (
         <div className="container">
-            <Table taskData={tasks} removeTask={removeOneTask} />
-            <Form handleSubmit={updateList} />
+            <div className="d-flex justify-content-end select">
+                <SelectButton
+                    value={value}
+                    onChange={(e) => setValue(e.value)}
+                    options={options}
+                />
+            </div>
+
+            {value == options[0] ? (
+                /* List View Section */
+                <section>
+                    <Table taskData={tasks} removeTask={removeOneTask} />
+                    <Form handleSubmit={updateList} />
+                </section>
+            ) : (
+                /* Calendar View Section */
+                <section className="select">
+                    <div>
+                        <FullCalendar
+                            plugins={[dayGridPlugin]}
+                            initialView="dayGridMonth"
+                            events={[
+                                { title: 'Turn in TE 1 helloooooooooo', date: '2024-11-12', start: new Date('2024-11-12 20:00:00'), end: new Date('2024-11-13 01:00:00') },
+                                { title: 'event 2 turn in teeeeeee', date: '2024-11-13', start: new Date('2024-11-13 10:00:00')}
+                              ]}
+                        />
+                    </div>
+                </section>
+            )}
         </div>
     );
 }

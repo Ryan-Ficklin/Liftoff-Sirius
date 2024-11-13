@@ -1,0 +1,16 @@
+@import "react-big-calendar/lib/css/react-big-calendar.css";
+
+.select{
+    margin-top: 2rem;
+}
+
+.p-highlight{
+    background-color: #147FFF;
+    border: transparent;
+    outline: none;
+}
+
+.p-button{
+    border: transparent;
+    outline: none;
+}
