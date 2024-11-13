@@ -18,21 +18,24 @@ function App() {
     function addAuthHeader(otherHeaders = {}) {
         const token = localStorage.getItem("token");
         if (token) {
-          return otherHeaders;
+            return otherHeaders;
         } else {
-          return {
-            ...otherHeaders,
-            Authorization: `Bearer ${token}`
-          };
+            return {
+                ...otherHeaders,
+                Authorization: `Bearer ${token}`
+            };
         }
-      }
+    }
 
     return (
         <PrimeReactProvider>
             <Toast ref={toast} />
             <Router>
                 <Routes>
-                    <Route path="/tasks" element={<TasksPage addAuthHeader={addAuthHeader} />} />
+                    <Route
+                        path="/tasks"
+                        element={<TasksPage addAuthHeader={addAuthHeader} />}
+                    />
                     <Route path="/login" element={<LoginPage showToast={showToast} />} />
                     <Route
                         path="/signup"
