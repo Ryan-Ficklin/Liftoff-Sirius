@@ -1,11 +1,11 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 function TableTask(props) {
     const task = props.task;
     return (
         <div className="TableTask">
             <div className="TableTaskTop">
-                <div>{task.tname}</div>
+                <div>{task.name}</div>
                 <div id="TableTaskTopDate">{task.date}</div>
                 <div id="TableTaskTopPriority">{task.priority}</div>
             </div>
@@ -18,5 +18,13 @@ function TableTask(props) {
         </div>
     );
 }
+
+// Validate the props
+TableTask.propTypes = {
+    task: PropTypes.object.isRequired,
+    index: PropTypes.any.isRequired,
+    removeTask: PropTypes.func.isRequired
+};
+
 
 export default TableTask;

@@ -59,6 +59,21 @@ app.get("/users", authenticateUser, async (req, res) => {
     }
 });
 
+app.get("/users/:username/tasks", authenticateUser, async (req, res) => {
+    const username = req.params["username"]
+    try {
+        const task_ids = await userService.getUsers(username);
+        if(task_ids){
+            const tasks = await taskService.getTasks(task_ids);
+            res.status(200).json({ task_list: tasks });
+        } else {
+            res.status(404).send("User not found");
+        }
+    } catch (error) {
+        res.status(500).send("Error fetching users: " + error.message);
+    }
+});
+
 app.get("/tasks", authenticateUser, async (req, res) => {
     const name = req.query.name;
     const description = req.query.description;

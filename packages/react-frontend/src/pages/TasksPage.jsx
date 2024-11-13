@@ -7,26 +7,41 @@ import { SelectButton } from "primereact/selectbutton";
 import "../TasksPage.css";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
+import logo from "../assets/sirius-logo.svg"
 
-function TasksPage({ addAuthHeader }) {
+function TasksPage({ addAuthHeader, showToast}) {
     let navigate = useNavigate();
     const options = ["List View", "Calendar View"];
     const [value, setValue] = useState(options[0]);
 
-    const [tasks, setTasks] = useState([
-        {
-            tname: "TE1",
-            priority: "1",
-            description: "Description 1",
-            dueDate: "10/28/2024"
-        },
-        {
-            tname: "TE2",
-            priority: "2",
-            description: "Description 2",
-            dueDate: "10/31/2024"
-        }
-    ]);
+    const [tasks, setTasks] = useState([]);
+
+    useEffect(() => {
+        getUserTasks();
+    }, []);
+
+    function getUserTasks(){
+        fetch(`http://localhost:8000/users/${localStorage.getItem("username")}/tasks`, {
+            method: "GET",
+            headers: addAuthHeader({
+                "Content-Type": "application/json", // Specify JSON format
+            }),
+        }).then((res) => {
+            console.log(res);
+            if (res.status == 200) {
+                return res.json();
+            }
+        }).then((data) => {
+            let list = data["task_list"];
+            console.log(list)
+            if(list){
+                console.log(list)
+                setTasks(list);
+            } else{
+                showToast("error", "Error", "Failed to load tasks for user");
+            }
+        });
+    }
 
     function checkUserAuth() {
         const token = localStorage.getItem("token");
@@ -65,7 +80,9 @@ function TasksPage({ addAuthHeader }) {
 
     return (
         <div className="container">
-            <div className="d-flex justify-content-end select">
+            <div className="d-flex justify-content-between select">
+                <img src={logo}className="logo"></img>
+                <h2>My Tasks</h2>
                 <SelectButton
                     value={value}
                     onChange={(e) => setValue(e.value)}
@@ -86,10 +103,10 @@ function TasksPage({ addAuthHeader }) {
                         <FullCalendar
                             plugins={[dayGridPlugin]}
                             initialView="dayGridMonth"
-                            events={[
-                                { title: 'Turn in TE 1 helloooooooooo', date: '2024-11-12', start: new Date('2024-11-12 20:00:00'), end: new Date('2024-11-13 01:00:00') },
-                                { title: 'event 2 turn in teeeeeee', date: '2024-11-13', start: new Date('2024-11-13 10:00:00')}
-                              ]}
+                            events={tasks.map(x => ({title : x.name, date : x.due_date_time.split('T')[0]})) 
+                                /*{ title: 'Turn in TE 1 helloooooooooo', date: '2024-11-12', start: new Date('2024-11-12 20:00:00'), end: new Date('2024-11-13 01:00:00') },
+                                { title: 'event 2 turn in teeeeeee', date: '2024-11-13', start: new Date('2024-11-13 10:00:00')}*/
+                              }
                         />
                     </div>
                 </section>
@@ -100,7 +117,8 @@ function TasksPage({ addAuthHeader }) {
 
 // Validate the props
 TasksPage.propTypes = {
-    addAuthHeader: PropTypes.func.isRequired // expects a function
+    addAuthHeader: PropTypes.func.isRequired, // expects a function
+    showToast: PropTypes.func.isRequired
 };
 
 export default TasksPage;
