@@ -5,7 +5,7 @@ body {
     color: white;
 }
 
-.TaskForm{
+.TaskForm {
     display: block;
     align-items: center;
     vertical-align: center;
@@ -17,13 +17,13 @@ body {
 
 .TaskTable {
     align: center;
-    background-color: #1B1550;
+    background-color: #1b1550;
     padding: auto;
     margin: auto;
     width: 25%;
 }
 
-.TableTask{
+.TableTask {
     display: block;
     align: center;
     background-color: #190466;
@@ -41,33 +41,32 @@ body {
     padding: auto;
 }
 
-.TableTaskTop > div{
+.TableTaskTop > div {
     margin: 3%;
     display: inline-block;
 }
 
-#TableTaskTopDate{
+#TableTaskTopDate {
     float: left;
 }
 
-
-#TableTaskTopPriority{
+#TableTaskTopPriority {
     float: left;
     clear: both;
-    margin-left: auto%;
+    margin-left: auto;
     padding: 2%;
     border-radius: 15px;
     border: 1px solid black;
     background-color: purple;
 }
 
-#TableTaskDescription{
+#TableTaskDescription {
     margin: 3%;
     background-color: #3810c9;
     border: 1px solid #7b57fa;
 }
 
-button{
+button {
     background-color: red;
     border-radius: 5px;
     font-size: 16px;

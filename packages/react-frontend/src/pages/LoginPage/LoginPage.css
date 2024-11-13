@@ -1,35 +1,35 @@
-.img{
+.img {
     width: 20vw;
 }
 
-.login-section{
+.login-section {
     margin-top: 10rem;
 }
 
-.card{
+.card {
     border-radius: 15px;
-    background-color: #1B1550;
+    background-color: #1b1550;
     margin-top: 1rem;
     width: 23vw;
 }
 
-.login-tag{
+.login-tag {
     color: white;
     margin-top: 1rem;
 }
 
-.input{
+.input {
     margin-top: -0.5rem;
     height: 2.5rem;
     font-size: 15px;
     margin-left: 5%;
     margin-right: 5%;
     background-color: transparent;
-    border: 1px solid #147FFF;
+    border: 1px solid #147fff;
     color: white;
 }
 
-.label{
+.label {
     font-size: 15px;
     color: white;
     font-weight: 600;
@@ -37,17 +37,17 @@
     margin-top: 1rem;
 }
 
-.signup{
+.signup {
     margin-top: 1rem;
     font-size: 15px;
-    color: #9A9A9A;
+    color: #9a9a9a;
     margin: 5%;
     cursor: pointer;
 }
 
-.login-btn{
+.login-btn {
     padding-block: 0.4rem;
-    background-color: #147FFF;
+    background-color: #147fff;
     color: white;
     margin-left: 5%;
     margin-right: 5%;
@@ -56,10 +56,10 @@
     transition: 0.4s;
 }
 
-.login-btn:hover{
+.login-btn:hover {
     background-color: #4790ea;
 }
 
-a{
+a {
     text-decoration: none;
 }
