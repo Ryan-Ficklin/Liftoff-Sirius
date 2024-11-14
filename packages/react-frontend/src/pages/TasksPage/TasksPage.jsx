@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import Table from "../Table.jsx";
-import Form from "../Form.jsx";
+import Table from "../../components/Table.jsx";
+import Form from "../../components/Form.jsx";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { SelectButton } from "primereact/selectbutton";
-import "../TasksPage.css";
+import "./TasksPage.css";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
-import logo from "../assets/sirius-logo.svg"
+import logo from "../../assets/sirius-logo.svg"
 
 function TasksPage({ addAuthHeader, showToast}) {
     let navigate = useNavigate();

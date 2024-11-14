@@ -1,8 +1,8 @@
 // App.js
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import TasksPage from "./pages/TasksPage";
-import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
+import TasksPage from "./pages/TasksPage/TasksPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { Toast } from "primereact/toast";
