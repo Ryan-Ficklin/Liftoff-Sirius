@@ -17,7 +17,7 @@ function App() {
 
     function addAuthHeader(otherHeaders = {}) {
         const token = localStorage.getItem("token");
-        if (token) {
+        if (!token) {
             return otherHeaders;
         } else {
             return {
