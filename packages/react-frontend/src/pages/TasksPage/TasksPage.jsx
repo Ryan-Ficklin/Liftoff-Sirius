@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Table from "../Table.jsx";
-import Form from "../Form.jsx";
+import Table from "../../components/Table.jsx";
+import Form from "../../components/Form.jsx";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { SelectButton } from "primereact/selectbutton";
-import "../TasksPage.css";
+import "./TasksPage.css";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 
@@ -87,9 +87,18 @@ function TasksPage({ addAuthHeader }) {
                             plugins={[dayGridPlugin]}
                             initialView="dayGridMonth"
                             events={[
-                                { title: 'Turn in TE 1 helloooooooooo', date: '2024-11-12', start: new Date('2024-11-12 20:00:00'), end: new Date('2024-11-13 01:00:00') },
-                                { title: 'event 2 turn in teeeeeee', date: '2024-11-13', start: new Date('2024-11-13 10:00:00')}
-                              ]}
+                                {
+                                    title: "Turn in TE 1 helloooooooooo",
+                                    date: "2024-11-12",
+                                    start: new Date("2024-11-12 20:00:00"),
+                                    end: new Date("2024-11-13 01:00:00")
+                                },
+                                {
+                                    title: "event 2 turn in teeeeeee",
+                                    date: "2024-11-13",
+                                    start: new Date("2024-11-13 10:00:00")
+                                }
+                            ]}
                         />
                     </div>
                 </section>

@@ -1,5 +1,5 @@
-import logo from "../assets/sirius-logo.svg";
-import "../LoginPage.css";
+import logo from "../../assets/sirius-logo.svg";
+import "./LoginPage.css";
 import { InputText } from "primereact/inputtext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
