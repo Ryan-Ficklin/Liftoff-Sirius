@@ -3,11 +3,11 @@ import Table from "../../components/Table.jsx";
 import Form from "../../components/Form.jsx";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { SelectButton } from "primereact/selectbutton";
 import "./TasksPage.css";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import logo from "../../assets/sirius-logo.svg"
+import ToggleButton from "../../components/ToggleButton.jsx";
 
 function TasksPage({ addAuthHeader, showToast}) {
     let navigate = useNavigate();
@@ -71,23 +71,37 @@ function TasksPage({ addAuthHeader, showToast}) {
     }
 
     function updateList(task) {
-        setTasks([...tasks, task]);
+        console.log(task)
+        fetch(`http://localhost:8000/tasks`, {
+            method: "POST",
+            headers: addAuthHeader({
+                "Content-Type": "application/json", // Specify JSON format
+            }),
+            body: JSON.stringify(task)
+        }).then((res) => {
+            console.log(res);
+            if (res.status == 201) {
+                setTasks([...tasks, task]);
+            } else {
+                showToast("error", "Error", "Failed to add task")
+            }
+        });
     }
 
     useEffect(() => {
         checkUserAuth();
     });
 
+    const handleToggle = (isToggled) => {
+        setValue(isToggled)
+      };
+
     return (
         <div className="container">
             <div className="d-flex justify-content-between select">
                 <img src={logo}className="logo"></img>
                 <h2>My Tasks</h2>
-                <SelectButton
-                    value={value}
-                    onChange={(e) => setValue(e.value)}
-                    options={options}
-                />
+                <ToggleButton option1={options[0]} option2={options[1]} onToggle={handleToggle} />
             </div>
 
             {value == options[0] ? (

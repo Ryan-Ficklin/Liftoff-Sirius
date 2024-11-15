@@ -64,7 +64,8 @@ app.get("/users/:username/tasks", authenticateUser, async (req, res) => {
     try {
         const task_ids = await userService.getUsers(username);
         if(task_ids){
-            const tasks = await taskService.getTasks(task_ids);
+            console.log(task_ids.task_list)
+            const tasks = await taskService.findTasksByIDList(task_ids.task_list);
             res.status(200).json({ task_list: tasks });
         } else {
             res.status(404).send("User not found");

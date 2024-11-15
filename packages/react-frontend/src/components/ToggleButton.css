@@ -1,0 +1,54 @@
+/* ToggleButton.css */
+
+.toggle-button {
+  position: relative;
+  display: flex;
+  background-color: #1b1550;
+  border-radius: 10px;
+  width: 25rem;
+}
+
+.toggle-option {
+  flex: 1;
+  padding: 0px 16px;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+  border-radius: 8px;
+  z-index: 1; /* Ensure buttons are above the slider */
+}
+
+.toggle-option.active {
+  color: white;
+  background-color: #147fff;
+}
+
+.toggle-option:not(.active):hover {
+  color: #2d2f48;
+}
+
+/* Slider element */
+.slider {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 5px;
+  width: calc(50% - 10px); /* Adjust for padding */
+  background-color: #147fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease;
+}
+
+/* Position slider to the right when the second option is active */
+.slider.right {
+  left: calc(50% + 5px);
+}
+
+.slider.left {
+  left: 5px;
+}

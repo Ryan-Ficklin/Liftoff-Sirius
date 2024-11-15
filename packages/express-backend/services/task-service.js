@@ -22,6 +22,12 @@ function findTaskByID(id) {
     return promise;
 }
 
+function findTasksByIDList(ids) {
+    let promise;
+    promise = taskModel.find({ _id: { $in: ids }});
+    return promise;
+}
+
 function addTask(task) {
     const taskToAdd = new taskModel(task);
     const promise = taskToAdd.save();
@@ -46,5 +52,6 @@ export default {
     findTaskByName,
     findTaskByPriority,
     deleteTask,
-    findTaskByID
+    findTaskByID,
+    findTasksByIDList
 };
