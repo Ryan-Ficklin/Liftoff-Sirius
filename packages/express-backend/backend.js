@@ -59,21 +59,6 @@ app.get("/users", authenticateUser, async (req, res) => {
     }
 });
 
-app.get("/users/:username/tasks", authenticateUser, async (req, res) => {
-    const username = req.params["username"]
-    try {
-        const task_ids = await userService.getUsers(username);
-        if(task_ids){
-            const tasks = await taskService.getTasks(task_ids);
-            res.status(200).json({ task_list: tasks });
-        } else {
-            res.status(404).send("User not found");
-        }
-    } catch (error) {
-        res.status(500).send("Error fetching users: " + error.message);
-    }
-});
-
 app.get("/tasks", authenticateUser, async (req, res) => {
     const name = req.query.name;
     const description = req.query.description;
@@ -110,34 +95,6 @@ app.get("/events", authenticateUser, async (req, res) => {
     }
 });
 
-/*app.get("/users/:username", async (req, res) => {
-  const username = req.params["username"];
-  try {
-    const result = await userService.findUserByUsername(username);
-    if (!result) {
-      res.status(404).send("Resource not found.");
-    } else {
-      res.status(200).json(result);
-    }
-  } catch (error) {
-    res.status(500).send("Error fetching user: " + error.message);
-  }
-});
-
-app.get("/users/:task_list", async (req, res) => {
-  const task_list = req.params["task_list"];
-  try {
-    const result = await userService.findUserByTask(task_list);
-    if (!result) {
-      res.status(404).send("Resource not found.");
-    } else {
-      res.status(200).json(result);
-    }
-  } catch (error) {
-    res.status(500).send("Error fetching user: " + error.message);
-  }
-});*/
-
 app.get("/tasks/:id", authenticateUser, async (req, res) => {
     const id = req.params["id"];
     try {
@@ -165,34 +122,6 @@ app.get("/events/:id", authenticateUser, async (req, res) => {
         res.status(500).send("Error fetching event: " + error.message);
     }
 });
-
-/*app.get("/tasks/:name", async (req, res) => {
-  const name = req.params["name"];
-  try {
-    const result = await userService.findTaskByName(name);
-    if (!result) {
-      res.status(404).send("Resource not found.");
-    } else {
-      res.status(200).json(result);
-    }
-  } catch (error) {
-    res.status(500).send("Error fetching user: " + error.message);
-  }
-});
-
-app.get("/tasks/:priority", async (req, res) => {
-  const priority = req.params["priority"];
-  try {
-    const result = await userService.findTaskByPrioity(priority);
-    if (!result) {
-      res.status(404).send("Resource not found.");
-    } else {
-      res.status(200).json(result);
-    }
-  } catch (error) {
-    res.status(500).send("Error fetching user: " + error.message);
-  }
-});*/
 
 app.post("/users", auth.authenticateUser, async (req, res) => {
     const userToAdd = req.body;
@@ -224,7 +153,8 @@ app.post("/tasks", authenticateUser, async (req, res) => {
     } catch (error) {
         res.status(500).send("Error adding task: " + error.message);
     }
-});
+  }
+);
 
 app.post("/events", authenticateUser, async (req, res) => {
     const eventToAdd = req.body;
@@ -278,6 +208,13 @@ app.delete("/events/:id", authenticateUser, async (req, res) => {
         res.status(500).send("Error deleting event: " + error.message);
     }
 });
+
+
+//Calendar
+let months = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"];
+let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);

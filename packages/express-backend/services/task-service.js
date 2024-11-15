@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import taskModel from "../models/task.js";
+import userModel from "../models/user.js";
 
 mongoose.set("debug", true);
 
@@ -24,7 +25,8 @@ function findTaskByID(id) {
 
 function addTask(task) {
     const taskToAdd = new taskModel(task);
-    const promise = taskToAdd.save();
+    taskToAdd.save();
+    const promise = userModel.save({task_list: task});
     return promise;
 }
 
