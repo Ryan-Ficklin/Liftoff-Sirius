@@ -10,11 +10,6 @@
     outline: none;
 }
 
-.p-button {
-    border: transparent;
-    outline: none;
-}
-
 .logo{
     width: 15rem;
     margin-left: 3%;
@@ -38,3 +33,53 @@
     border: none;
     outline: none;
 }
+
+.no-tasks-img{
+    width: 20vw;
+}
+
+.center{
+    text-align: center;
+}
+
+.no-tasks-title{
+    margin-top: 1rem;
+}
+
+.no-tasks-subhead{
+    color: rgb(134, 134, 134);
+    max-width: 25vw;
+    font-size: 15px;
+}
+
+.create-task-btn{
+    margin-top: -2rem;
+    background-color: #147fff;
+    color: white;
+    padding-inline: 6rem;
+    padding-block: 0.5rem;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+}
+
+.no-tasks-section{
+    margin-top: 17vh;
+}
+
+.create-task-dialog .p-dialog-content{
+    background-color: #1B1550;
+}
+
+.create-task-dialog .p-dialog-header{
+    background-color: #1B1550;
+}
+
+.create-task-dialog .p-dialog-tile{
+    color: white;
+}
+.create-task-dialog .p-dialog-header-close{
+    color: white;
+    background-color: transparent;
+}
+

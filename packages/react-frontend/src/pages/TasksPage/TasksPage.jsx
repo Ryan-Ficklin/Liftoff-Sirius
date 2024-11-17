@@ -9,6 +9,8 @@ import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import logo from "../../assets/sirius-logo.svg";
 import ToggleButton from "../../components/ToggleButton.jsx";
 import { Dialog } from "primereact/dialog";
+import no_tasks_img from "../../assets/no_tasks.svg";
+import { InputText } from 'primereact/inputtext';
 
 function TasksPage({ addAuthHeader, showToast }) {
     let navigate = useNavigate();
@@ -102,22 +104,16 @@ function TasksPage({ addAuthHeader, showToast }) {
     return (
         <div>
             <Dialog
-                header="Header"
+                header="Create Task"
                 visible={createDialogVisible}
-                style={{ width: "50vw" }}
+                style={{ width: "fit-content" }}
+                className="create-task-dialog"
                 onHide={() => {
                     if (!createDialogVisible) return;
                     setCreateDialogVisible(false);
                 }}>
-                <p className="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                </p>
+                
+                <input></input>
             </Dialog>
 
             <div className="d-flex justify-content-between select">
@@ -140,13 +136,35 @@ function TasksPage({ addAuthHeader, showToast }) {
             {value == options[0] ? (
                 /* List View Section */
                 <section>
-                    <Table taskData={tasks} removeTask={removeOneTask} />
-                    <Form handleSubmit={updateList} />
+                    {tasks.length != 0 ? (
+                        <div>
+                            <Table taskData={tasks} removeTask={removeOneTask} />
+                            <Form handleSubmit={updateList} />
+                        </div>
+                    ) : (
+                        <div>
+                            <center className="no-tasks-section">
+                                <div>
+                                    <img src={no_tasks_img} className="no-tasks-img" />
+                                    <h2 className="no-tasks-title center">
+                                        No Tasks Found
+                                    </h2>
+                                    <p className="center no-tasks-subhead">
+                                        You don&apos;t have any tasks. Add one by clicking
+                                        the + button on the top or the button below
+                                    </p>
+                                    <button className="create-task-btn" onClick={() => setCreateDialogVisible(true)}>
+                                        Create Task
+                                    </button>
+                                </div>
+                            </center>
+                        </div>
+                    )}
                 </section>
             ) : (
                 /* Calendar View Section */
                 <section className="select">
-                    <div>
+                    <div className="container">
                         <FullCalendar
                             plugins={[dayGridPlugin]}
                             initialView="dayGridMonth"
