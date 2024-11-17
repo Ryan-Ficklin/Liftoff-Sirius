@@ -7,7 +7,8 @@ import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { Toast } from "primereact/toast";
 import { useRef } from "react";
-
+import 'primeicons/primeicons.css';
+        
 function App() {
     const toast = useRef(null);
 

@@ -2,8 +2,12 @@ import { useState } from 'react';
 import './ToggleButton.css';
 import PropTypes from 'prop-types';
 
-function ToggleButton({ option1 = "One-Way", option2 = "Return", onToggle }) {
-  const [selectedOption, setSelectedOption] = useState(option1);
+function ToggleButton({ onToggle }) {
+  const list_view_icon = (<i key="option1" className='pi pi-bars'></i>)
+  const calendar_view_icon = (<i key="option2" className='pi pi-calendar'></i>);
+  const calendar_view = "calendar-view";
+  const list_view = "list-view";
+  const [selectedOption, setSelectedOption] = useState(list_view);
 
   const handleToggle = (option) => {
     setSelectedOption(option);
@@ -15,19 +19,19 @@ function ToggleButton({ option1 = "One-Way", option2 = "Return", onToggle }) {
   return (
     <div className="toggle-button">
       <div
-        className={`slider ${selectedOption === option2 ? "right" : "left"}`}
+        className={`slider ${selectedOption === calendar_view ? "right" : "left"}`}
       ></div>
       <button
-        className={`toggle-option ${selectedOption === option1 ? "active" : ""}`}
-        onClick={() => handleToggle(option1)}
+        className={`toggle-option ${selectedOption === list_view ? "active" : ""}`}
+        onClick={() => handleToggle(list_view)}
       >
-        {option1}
+        {list_view_icon}
       </button>
       <button
-        className={`toggle-option ${selectedOption === option2 ? "active" : ""}`}
-        onClick={() => handleToggle(option2)}
+        className={`toggle-option ${selectedOption === calendar_view ? "active" : ""}`}
+        onClick={() => handleToggle(calendar_view)}
       >
-        {option2}
+        {calendar_view_icon}
       </button>
     </div>
   );
@@ -35,8 +39,6 @@ function ToggleButton({ option1 = "One-Way", option2 = "Return", onToggle }) {
 
 // Validate the props
 ToggleButton.propTypes = {
-  option1: PropTypes.any.isRequired,
-  option2: PropTypes.any.isRequired,
   onToggle: PropTypes.func.isRequired
 
 };

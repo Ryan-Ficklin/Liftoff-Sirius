@@ -5,12 +5,13 @@
   display: flex;
   background-color: #1b1550;
   border-radius: 10px;
-  width: 25rem;
+  width: 15rem;
+  height: 3.5rem;
 }
 
 .toggle-option {
   flex: 1;
-  padding: 0px 16px;
+  padding: 0px 10px;
   background: none;
   border: none;
   color: #888;
