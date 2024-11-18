@@ -35,8 +35,8 @@ function TasksPage({ addAuthHeader, showToast}) {
             let list = data["task_list"];
             console.log(list)
             if(list){
-                console.log(list)
-                setTasks(list);
+                console.log(list) 
+                setTasks(sortTasks(list));
             } else{
                 showToast("error", "Error", "Failed to load tasks for user");
             }
@@ -67,11 +67,31 @@ function TasksPage({ addAuthHeader, showToast}) {
         const updated = tasks.filter((task, i) => {
             return i !== index;
         });
-        setTasks(updated);
+        setTasks(sortTasks(updated));
+    }
+
+    // call this inside setTasks to always keep the tasklist sorted
+    // I think a priority queue would do this job better, but that is a 
+    // hassle with json, and this is ultimately not very expensive
+    function sortTasks(taskList){
+        taskList.sort((a, b) => {
+            if(a.priority ===  b.priority){
+                if(a.dueDate > b.dueDate){
+                    return 1;
+                } else{
+                    return -1;
+                }
+            } else if(a.priority > b.priority){
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+        return taskList;
     }
 
     function updateList(task) {
-        setTasks([...tasks, task]);
+        setTasks(sortTasks([...tasks, task]));
     }
 
     useEffect(() => {

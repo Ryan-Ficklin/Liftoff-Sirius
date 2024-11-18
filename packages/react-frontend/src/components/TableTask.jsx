@@ -5,8 +5,8 @@ function TableTask(props) {
     return (
         <div className="TableTask">
             <div className="TableTaskTop">
-                <div>{task.name}</div>
-                <div id="TableTaskTopDate">{task.date}</div>
+                <div>{task.tname}</div>
+                <div id="TableTaskTopDate">{task.dueDate}</div>
                 <div id="TableTaskTopPriority">{task.priority}</div>
             </div>
             <p id="TableTaskDescription">{task.description}</p>
