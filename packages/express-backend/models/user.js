@@ -20,11 +20,11 @@ const UserSchema = new mongoose.Schema(
             trim: true
         },
         task_list: {
-            type: [{type: mongoose.ObjectId, ref: 'Task'}],
+            type: [{ type: mongoose.ObjectId, ref: "Task" }],
             required: true
         },
         event_list: {
-            type: [{type: mongoose.ObjectId, ref: 'Event'}],
+            type: [{ type: mongoose.ObjectId, ref: "Event" }],
             required: true
         },
         email: {

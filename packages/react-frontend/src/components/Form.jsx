@@ -1,46 +1,47 @@
-import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { useState } from "react";
 
 function Form(props) {
     const [task, setTask] = useState({
-        tname: "",
+        name: "",
         description: "",
         priority: "",
-        dueDate: ""
+        due_date_time: ""
     });
 
     function handleChange(event) {
         const { name, value } = event.target;
         switch (name) {
-            case "tname":
+            case "name":
                 setTask({
-                    tname: value,
+                    name: value,
                     description: task["description"],
                     priority: task["priority"],
-                    dueDate: task["dueDate"]
+                    due_date_time: task["due_date_time"]
                 });
                 break;
             case "description":
                 setTask({
-                    tname: task["tname"],
+                    name: task["name"],
                     description: value,
                     priority: task["priority"],
-                    dueDate: task["dueDate"]
+                    due_date_time: task["due_date_time"]
                 });
                 break;
             case "priority":
                 setTask({
-                    tname: task["tname"],
+                    name: task["name"],
                     description: task["description"],
                     priority: value,
-                    dueDate: task["dueDate"]
+                    due_date_time: task["due_date_time"]
                 });
                 break;
-            case "dueDate":
+            case "due_date_time":
                 setTask({
-                    tname: task["tname"],
+                    name: task["name"],
                     description: task["description"],
                     priority: task["priority"],
-                    dueDate: value
+                    due_date_time: value
                 });
                 break;
         }
@@ -54,12 +55,12 @@ function Form(props) {
     return (
         <form>
             <div className="TaskForm">
-                <label htmlFor="tname">Task</label>
+                <label htmlFor="name">Task</label>
                 <input
                     type="text"
-                    name="tname"
-                    id="tname"
-                    value={task.tname}
+                    name="name"
+                    id="name"
+                    value={task.name}
                     onChange={handleChange}
                 />
                 <label htmlFor="description">Description</label>
@@ -78,12 +79,12 @@ function Form(props) {
                     value={task.priority}
                     onChange={handleChange}
                 />
-                <label htmlFor="dueDate">Due Date</label>
+                <label htmlFor="due_date_time">Due Date</label>
                 <input
                     type="date"
-                    name="dueDate"
-                    id="dueDate"
-                    value={task.dueDate}
+                    name="due_date_time"
+                    id="due_date_time"
+                    value={task.due_date_time}
                     onChange={handleChange}
                 />
                 <input type="button" value="Submit" onClick={submitForm} />
@@ -91,5 +92,10 @@ function Form(props) {
         </form>
     );
 }
+
+// Validate the props
+Form.propTypes = {
+    handleSubmit: PropTypes.func.isRequired // expects a function
+};
 
 export default Form;

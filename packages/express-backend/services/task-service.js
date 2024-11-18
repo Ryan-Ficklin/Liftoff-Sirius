@@ -23,10 +23,17 @@ function findTaskByID(id) {
     return promise;
 }
 
-function addTask(task) {
+function findTasksByIDList(ids) {
+    let promise;
+    promise = taskModel.find({ _id: { $in: ids } });
+    return promise;
+}
+
+function addTask(task, user) {
     const taskToAdd = new taskModel(task);
     taskToAdd.save();
-    const promise = userModel.save({task_list: task});
+    console.log(user.task_list);
+    const promise = user.save({ task_list: user.task_list.push(taskToAdd.id) });
     return promise;
 }
 
@@ -38,8 +45,12 @@ function findTaskByPriority(priority) {
     return taskModel.find({ priority: priority });
 }
 
-const deleteTask = (name) => {
-    findOneandDelete({ name: name });
+const deleteTask = async (id, user) => {
+    console.log(id);
+    await taskModel.findOneAndDelete({ _id: id });
+    user.task_list = user.task_list.filter((taskId) => taskId.toString() !== id);
+    const promise = user.save();
+    return promise;
 };
 
 export default {
@@ -48,5 +59,6 @@ export default {
     findTaskByName,
     findTaskByPriority,
     deleteTask,
-    findTaskByID
+    findTaskByID,
+    findTasksByIDList
 };
