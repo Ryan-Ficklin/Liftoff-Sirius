@@ -7,8 +7,8 @@ import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { Toast } from "primereact/toast";
 import { useRef } from "react";
-import 'primeicons/primeicons.css';
-        
+import "primeicons/primeicons.css";
+
 function App() {
     const toast = useRef(null);
 
@@ -35,7 +35,12 @@ function App() {
                 <Routes>
                     <Route
                         path="/tasks"
-                        element={<TasksPage addAuthHeader={addAuthHeader} />}
+                        element={
+                            <TasksPage
+                                addAuthHeader={addAuthHeader}
+                                showToast={showToast}
+                            />
+                        }
                     />
                     <Route path="/login" element={<LoginPage showToast={showToast} />} />
                     <Route

@@ -95,8 +95,7 @@ function Form(props) {
 
 // Validate the props
 Form.propTypes = {
-    handleSubmit: PropTypes.func.isRequired, // expects a function
+    handleSubmit: PropTypes.func.isRequired // expects a function
 };
-
 
 export default Form;

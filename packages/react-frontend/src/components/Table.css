@@ -1,0 +1,69 @@
+.task-name {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.TaskTable {
+    align: center;
+    padding: auto;
+    margin: auto;
+    width: 25%;
+    margin-top: 1rem;
+    border-radius: 10px;
+}
+
+.tag {
+    padding-inline: 1rem;
+    height: 2rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+}
+
+.date-tag {
+    padding-inline: 1rem;
+    height: 2rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    background-color: #147fff;
+}
+
+.TableTask {
+    display: block;
+    align: center;
+    background-color: #1b1550;
+    border-radius: 15px;
+    width: auto;
+    padding: auto;
+    margin: 5%;
+}
+
+#TableTaskTopDate {
+    float: left;
+}
+
+.description {
+    margin: 1rem;
+    font-size: 16px;
+}
+
+.delete-btn {
+    margin-right: 1rem;
+    margin-top: 1rem;
+    font-size: 16px;
+    border: 1px solid white;
+    outline: none;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    padding-inline: 2rem;
+    padding-block: 0.2rem;
+    background-color: transparent;
+    color: white;
+    transition: 0.2s;
+}
+
+.delete-btn:hover {
+    background-color: #8f8f8f;
+    border: 1px solid #147fff;
+}

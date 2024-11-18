@@ -77,6 +77,23 @@ app.get("/tasks", authenticateUser, async (req, res) => {
     }
 });
 
+app.get("/users/:username/tasks", authenticateUser, async (req, res) => {
+    const username = req.params["username"];
+    try {
+        const user = await userService.getUsers(username);
+        console.log(user);
+        if (user) {
+            console.log(user.task_list);
+            const tasks = await taskService.findTasksByIDList(user.task_list);
+            res.status(200).json({ task_list: tasks });
+        } else {
+            res.status(404).send("User not found");
+        }
+    } catch (error) {
+        res.status(500).send("Error fetching users: " + error.message);
+    }
+});
+
 app.get("/events", authenticateUser, async (req, res) => {
     const name = req.query.name;
     const description = req.query.description;
@@ -146,15 +163,23 @@ app.post("/checkAuth", async (req, res) => {
 
 app.post("/tasks", authenticateUser, async (req, res) => {
     const taskToAdd = req.body;
-    // const addedTask = addTask(taskToAdd);
-    try {
-        const addedTask = await taskService.addTask(taskToAdd);
-        res.status(201).json(addedTask);
-    } catch (error) {
-        res.status(500).send("Error adding task: " + error.message);
+    const user = req.headers["user"];
+    if (user) {
+        const userObj = await userService.getUsers(user);
+        if (userObj) {
+            try {
+                const addedTask = await taskService.addTask(taskToAdd, userObj);
+                res.status(201).json(addedTask);
+            } catch (error) {
+                res.status(500).send("Error adding task: " + error.message);
+            }
+        } else {
+            res.status(404).json("User doesn't exist");
+        }
+    } else {
+        res.status(404).send("User not found, include 'user' header");
     }
-  }
-);
+});
 
 app.post("/events", authenticateUser, async (req, res) => {
     const eventToAdd = req.body;
@@ -181,17 +206,27 @@ app.delete("/users/:username", authenticateUser, async (req, res) => {
     }
 });
 
-app.delete("/tasks/:name", authenticateUser, async (req, res) => {
-    const name = req.params["name"];
-    try {
-        const result = await taskService.deleteTask(name);
-        if (!result) {
-            res.status(404).send("Task not found.");
+app.delete("/tasks/:id", authenticateUser, async (req, res) => {
+    const id = req.params["id"];
+    const user = req.headers["user"];
+    if (id && user) {
+        const userObj = await userService.getUsers(user);
+        if (userObj) {
+            try {
+                const result = await taskService.deleteTask(id, userObj);
+                if (!result) {
+                    res.status(404).send("Task not found.");
+                } else {
+                    res.sendStatus(204);
+                }
+            } catch (error) {
+                res.status(500).send("Error deleting task: " + error.message);
+            }
         } else {
-            res.sendStatus(204);
+            res.status(404).send("User not found");
         }
-    } catch (error) {
-        res.status(500).send("Error deleting task: " + error.message);
+    } else {
+        res.status(404).send("Header 'user' and param 'id' must be given");
     }
 });
 
@@ -209,12 +244,22 @@ app.delete("/events/:id", authenticateUser, async (req, res) => {
     }
 });
 
-
 //Calendar
-let months = ["January", "February", "March", "April", "May", "June",
-              "July", "August", "September", "October", "November", "December"];
+let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+];
 let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);

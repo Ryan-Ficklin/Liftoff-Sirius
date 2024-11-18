@@ -10,23 +10,23 @@
     outline: none;
 }
 
-.logo{
+.logo {
     width: 15rem;
     margin-left: 3%;
 }
 
-.toggle{
+.toggle {
     margin-right: 3%;
 }
 
-.title{
+.title {
     width: 10rem;
     text-align: center;
     vertical-align: middle;
     padding-top: 0.3rem;
 }
 
-.add-btn{
+.add-btn {
     background-color: transparent;
     padding: 0;
     margin: 0;
@@ -34,25 +34,25 @@
     outline: none;
 }
 
-.no-tasks-img{
+.no-tasks-img {
     width: 20vw;
 }
 
-.center{
+.center {
     text-align: center;
 }
 
-.no-tasks-title{
+.no-tasks-title {
     margin-top: 1rem;
 }
 
-.no-tasks-subhead{
+.no-tasks-subhead {
     color: rgb(134, 134, 134);
     max-width: 25vw;
     font-size: 15px;
 }
 
-.create-task-btn{
+.create-task-btn {
     margin-top: -2rem;
     background-color: #147fff;
     color: white;
@@ -61,25 +61,157 @@
     border-radius: 5px;
     outline: none;
     border: none;
+    font-size: 17px;
+    font-weight: 600;
 }
 
-.no-tasks-section{
+.no-tasks-section {
     margin-top: 17vh;
 }
 
-.create-task-dialog .p-dialog-content{
-    background-color: #1B1550;
+.create-task-dialog .p-dialog-content {
+    background-color: #1b1550;
 }
 
-.create-task-dialog .p-dialog-header{
-    background-color: #1B1550;
+.create-task-dialog .p-dialog-header {
+    background-color: #1b1550;
 }
 
-.create-task-dialog .p-dialog-tile{
+.create-task-dialog .p-dialog-title {
     color: white;
 }
-.create-task-dialog .p-dialog-header-close{
+.create-task-dialog .p-dialog-header-close {
     color: white;
     background-color: transparent;
 }
 
+.dialog-input {
+    border-radius: 5px;
+    border: none;
+    outline: 1px solid #147fff;
+    background-color: transparent;
+    color: white;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    width: 100%;
+    margin-top: 0.3rem;
+    font-size: 14px;
+    height: fit-content;
+    min-height: 3em;
+}
+
+.dialog-input-helper {
+    color: white;
+    margin-top: 1rem;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 0rem;
+}
+
+.dialog-content-section {
+    margin-top: 1rem;
+}
+
+.calendar-input {
+    width: 100%;
+}
+
+.calendar-input .p-inputtext {
+    border-radius: 5px;
+    border: none;
+    outline: 1px solid #147fff;
+    background-color: transparent;
+    color: white;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    width: 100%;
+    margin-top: 0.3rem;
+    font-size: 14px;
+    height: fit-content;
+    min-height: 3em;
+    font-weight: bold;
+}
+
+.p-datepicker {
+    background-color: #070b28;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.p-datepicker-header {
+    background-color: #070b28;
+}
+
+.p-datepicker-month {
+    background-color: transparent;
+    color: white;
+}
+
+.p-datepicker-year {
+    background-color: transparent;
+    color: white;
+}
+
+.p-datepicker-prev {
+    background-color: transparent;
+    color: white;
+}
+
+.p-datepicker-next {
+    background-color: transparent;
+    color: white;
+}
+
+.p-monthpicker-month {
+    color: white;
+    background-color: transparent;
+}
+
+.p-monthpicker-month:hover {
+    background-color: #147fff;
+}
+
+.p-yearpicker-year {
+    color: white;
+    background-color: transparent;
+}
+
+.p-yearpicker-year:hover {
+    background-color: #147fff;
+}
+
+.p-datepicker-calendar {
+    color: white;
+    background-color: transparent;
+}
+
+.p-datepicker-current-day {
+    background-color: #147fff;
+    color: white;
+}
+
+.p-datepicker-calendar td span:hover {
+    background-color: #147fff;
+    color: white;
+}
+
+.p-datepicker-calendar td span.p-highlight {
+    color: white;
+}
+
+.p-datepicker-today {
+    color: white;
+}
+
+.dialog-add-task-btn {
+    background-color: #147fff;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    width: 100%;
+    color: white;
+    margin-top: 2rem;
+    padding-block: 0.5rem;
+    font-size: 16px;
+    font-weight: 500;
+}

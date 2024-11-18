@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Table from "../../components/Table.jsx";
-import Form from "../../components/Form.jsx";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./TasksPage.css";
@@ -8,9 +7,8 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import logo from "../../assets/sirius-logo.svg";
 import ToggleButton from "../../components/ToggleButton.jsx";
-import { Dialog } from "primereact/dialog";
 import no_tasks_img from "../../assets/no_tasks.svg";
-import { InputText } from 'primereact/inputtext';
+import AddTaskDialog from "../../components/AddTaskDialog.jsx";
 
 function TasksPage({ addAuthHeader, showToast }) {
     let navigate = useNavigate();
@@ -69,10 +67,35 @@ function TasksPage({ addAuthHeader, showToast }) {
     }
 
     function removeOneTask(index) {
-        const updated = tasks.filter((task, i) => {
+        /*const updated = tasks.filter((task, i) => {
             return i !== index;
+        });*/
+        /*setTasks(updated);*/
+
+        console.log(tasks);
+        console.log(index);
+        const task = tasks[index];
+        console.log(task);
+
+        fetch(`http://localhost:8000/tasks/${task["_id"]}`, {
+            method: "DELETE",
+            headers: addAuthHeader({
+                "Content-Type": "application/json", // Specify JSON format
+                user: localStorage.getItem("username")
+            }),
+            body: JSON.stringify(task)
+        }).then((res) => {
+            console.log(res);
+            if (res.status == 204) {
+                /*setTasks([...tasks, task]);*/
+                getUserTasks();
+                setCreateDialogVisible(false);
+            } else {
+                showToast("error", "Error", "Failed to remove task");
+            }
         });
-        setTasks(updated);
+
+        getUserTasks();
     }
 
     function updateList(task) {
@@ -80,13 +103,16 @@ function TasksPage({ addAuthHeader, showToast }) {
         fetch(`http://localhost:8000/tasks`, {
             method: "POST",
             headers: addAuthHeader({
-                "Content-Type": "application/json" // Specify JSON format
+                "Content-Type": "application/json", // Specify JSON format
+                user: localStorage.getItem("username")
             }),
             body: JSON.stringify(task)
         }).then((res) => {
             console.log(res);
             if (res.status == 201) {
-                setTasks([...tasks, task]);
+                /*setTasks([...tasks, task]);*/
+                getUserTasks();
+                setCreateDialogVisible(false);
             } else {
                 showToast("error", "Error", "Failed to add task");
             }
@@ -103,18 +129,56 @@ function TasksPage({ addAuthHeader, showToast }) {
 
     return (
         <div>
-            <Dialog
+            <AddTaskDialog
+                handleSubmit={updateList}
+                createDialogVisible={createDialogVisible}
+                setCreateDialogVisible={setCreateDialogVisible}
+                showToast={showToast}
+            />
+
+            {/* <Dialog
                 header="Create Task"
                 visible={createDialogVisible}
-                style={{ width: "fit-content" }}
+                style={{ width: "25vw" }}
                 className="create-task-dialog"
                 onHide={() => {
                     if (!createDialogVisible) return;
                     setCreateDialogVisible(false);
                 }}>
-                
-                <input></input>
-            </Dialog>
+                <div className="dialog-content-section">
+                    <p className="dialog-input-helper">Task name</p>
+                    <input
+                        className="dialog-input"
+                        placeholder="ie. Get TE 5 Finished"
+                        type="text"
+                        name="name"
+                        id="name"></input>
+
+                    <p className="dialog-input-helper">Task Description</p>
+                    <textarea
+                        className="dialog-input"
+                        placeholder="ie. Finish up the assignment"
+                        type="text"
+                        name="description"
+                        cols={3}
+                        id="description"></textarea>
+
+                    <p className="dialog-input-helper">Priority</p>
+                    <input
+                        className="dialog-input"
+                        placeholder="ie. 1,2,3"
+                        type="number"
+                        name="priority"
+                        id="priority"
+                        style={{ fontWeight: "bold", fontSize: "15px" }}></input>
+
+                    <p className="dialog-input-helper">Due Date</p>
+                    <Calendar value={dueDate} onChange={(e) => setDueDate(e.value)} className="calendar-input"/>
+
+                        <button className="dialog-add-task-btn">Add Task</button>
+
+                </div>
+            </Dialog> */}
 
             <div className="d-flex justify-content-between select">
                 <img src={logo} className="logo"></img>
@@ -124,7 +188,7 @@ function TasksPage({ addAuthHeader, showToast }) {
                     <button
                         className="add-btn"
                         onClick={() => setCreateDialogVisible(true)}>
-                        <i className="pi pi-plus"></i>
+                        <i className="pi pi-plus" style={{ color: "white" }}></i>
                     </button>
                 </div>
 
@@ -139,7 +203,6 @@ function TasksPage({ addAuthHeader, showToast }) {
                     {tasks.length != 0 ? (
                         <div>
                             <Table taskData={tasks} removeTask={removeOneTask} />
-                            <Form handleSubmit={updateList} />
                         </div>
                     ) : (
                         <div>
@@ -153,7 +216,9 @@ function TasksPage({ addAuthHeader, showToast }) {
                                         You don&apos;t have any tasks. Add one by clicking
                                         the + button on the top or the button below
                                     </p>
-                                    <button className="create-task-btn" onClick={() => setCreateDialogVisible(true)}>
+                                    <button
+                                        className="create-task-btn"
+                                        onClick={() => setCreateDialogVisible(true)}>
                                         Create Task
                                     </button>
                                 </div>

@@ -1,15 +1,6 @@
 import TableTask from "./TableTask.jsx";
 import PropTypes from "prop-types";
-
-function TableHeader() {
-    return (
-        <thead>
-            <tr>
-                <th>Tasks</th>
-            </tr>
-        </thead>
-    );
-}
+import "./Table.css";
 
 function TableBody(props) {
     const tasks = props.taskData.map((row, index) => {
@@ -30,7 +21,6 @@ TableBody.propTypes = {
 function Table(props) {
     return (
         <table className="TaskTable">
-            <TableHeader />
             <TableBody taskData={props.taskData} removeTask={props.removeTask} />
         </table>
     );
