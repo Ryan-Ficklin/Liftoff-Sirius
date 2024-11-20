@@ -100,10 +100,10 @@ function TasksPage({ addAuthHeader, showToast }) {
     // call this inside setTasks to always keep the tasklist sorted
     // I think a priority queue would do this job better, but that is a 
     // hassle with json, and this is ultimately not very expensive
-    function sortTasks(taskList){
+    function sortTasks(taskList){ 
         taskList.sort((a, b) => {
             if(a.priority ===  b.priority){
-                if(a.dueDate > b.dueDate){
+                if(a.due_date_time > b.due_date_time){
                     return 1;
                 } else{
                     return -1;
