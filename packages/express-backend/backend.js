@@ -261,6 +261,7 @@ let months = [
 ];
 let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+app.listen(process.env.PORT || port, () => {
+    //console.log(`Example app listening at http://localhost:${port}`);
+    console.log("Rest API is listening");
 });
