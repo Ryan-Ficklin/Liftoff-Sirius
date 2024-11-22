@@ -51,7 +51,7 @@ function TasksPage({ addAuthHeader, showToast }) {
         if (!token) {
             navigate("/login");
         } else {
-            fetch("http://localhost:8000/checkAuth", {
+            fetch("https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/checkAuth", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json" // Specify JSON format
@@ -77,7 +77,7 @@ function TasksPage({ addAuthHeader, showToast }) {
         const task = tasks[index];
         console.log(task);
 
-        fetch(`http://localhost:8000/tasks/${task["_id"]}`, {
+        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/${task["_id"]}`, {
             method: "DELETE",
             headers: addAuthHeader({
                 "Content-Type": "application/json", // Specify JSON format
@@ -119,7 +119,7 @@ function TasksPage({ addAuthHeader, showToast }) {
 
     function updateList(task) {
         console.log(task);
-        fetch(`http://localhost:8000/tasks`, {
+        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks`, {
             method: "POST",
             headers: addAuthHeader({
                 "Content-Type": "application/json", // Specify JSON format
