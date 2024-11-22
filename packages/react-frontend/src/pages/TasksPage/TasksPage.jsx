@@ -22,7 +22,7 @@ function TasksPage({ addAuthHeader, showToast }) {
     }, []);
 
     function getUserTasks() {
-        fetch(`http://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/users/${localStorage.getItem("username")}/tasks`, {
+        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/users/${localStorage.getItem("username")}/tasks`, {
             method: "GET",
             headers: addAuthHeader({
                 "Content-Type": "application/json" // Specify JSON format
