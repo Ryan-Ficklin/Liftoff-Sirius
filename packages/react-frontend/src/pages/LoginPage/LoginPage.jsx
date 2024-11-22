@@ -22,7 +22,7 @@ function LoginPage({ showToast }) {
             console.log("works");
 
             // Backend call
-            fetch("http://localhost:8000/login", {
+            fetch("http://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json" // Specify JSON format
