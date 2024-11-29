@@ -45,6 +45,10 @@ function findTaskByPriority(priority) {
     return taskModel.find({ priority: priority });
 }
 
+const updateTask = async(id, newtask) => {
+    return taskModel.findByIdAndUpdate(id, newtask);
+};
+
 const deleteTask = async (id, user) => {
     console.log(id);
     await taskModel.findOneAndDelete({ _id: id });
@@ -58,6 +62,7 @@ export default {
     getTasks,
     findTaskByName,
     findTaskByPriority,
+    updateTask,
     deleteTask,
     findTaskByID,
     findTasksByIDList

@@ -138,6 +138,30 @@ function TasksPage({ addAuthHeader, showToast }) {
         });
     }
 
+    function editEntry(newtask, index) {
+        console.log(newtask);
+        const task = tasks[index];
+        console.log(task);
+        
+        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/${task["_id"]}`, {
+            method: "PUT",
+            headers: addAuthHeader({
+                "Content-Type": "application/json", // Specify JSON format
+                user: localStorage.getItem("username")
+            }),
+            body: JSON.stringify(newtask)
+        }).then((res) => {
+            console.log(res);
+            if (res.status == 204) {
+                /*setTasks([...tasks, task]);*/
+                getUserTasks();
+                setCreateDialogVisible(false);
+            } else {
+                showToast("error", "Error", "Failed to update task");
+            }
+        });
+    }
+
     useEffect(() => {
         checkUserAuth();
     });
@@ -221,7 +245,7 @@ function TasksPage({ addAuthHeader, showToast }) {
                 <section>
                     {tasks.length != 0 ? (
                         <div>
-                            <Table taskData={tasks} removeTask={removeOneTask} />
+                            <Table taskData={tasks} editEntry={editEntry} removeTask={removeOneTask} showToast={showToast}/>
                         </div>
                     ) : (
                         <div>

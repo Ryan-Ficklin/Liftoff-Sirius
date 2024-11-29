@@ -244,6 +244,32 @@ app.delete("/events/:id", authenticateUser, async (req, res) => {
     }
 });
 
+app.put("/tasks/:id", authenticateUser, async (req, res) => {
+    const taskToPut = req.body;
+
+    const id = req.params["id"];
+    const user = req.headers["user"];
+    if (id && user) {
+        const userObj = await userService.getUsers(user);
+        if (userObj) {
+            try {
+                const result = await taskService.updateTask(id, taskToPut);
+                if (!result) {
+                    res.status(404).send("Task not found.");
+                } else {
+                    res.sendStatus(204);
+                }
+            } catch (error) {
+                res.status(500).send("Error updating task: " + error.message);
+            }
+        } else {
+            res.status(404).send("User not found");
+        }
+    } else {
+        res.status(404).send("Header 'user' and param 'id' must be given");
+    }
+});
+
 //Calendar
 let months = [
     "January",
