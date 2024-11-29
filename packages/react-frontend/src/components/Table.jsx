@@ -5,7 +5,7 @@ import "./Table.css";
 function TableBody(props) {
     const tasks = props.taskData.map((row, index) => {
         return (
-            <tbody key={index}>
+            <tbody key={row._id}>
                 <TableTask task={row} editEntry={props.editEntry} removeTask={props.removeTask} index={index} showToast={props.showToast}/>
             </tbody>
         );
