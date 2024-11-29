@@ -49,7 +49,8 @@ function EditTaskDialog(props) {
         console.log(task);
         if (task.name && task.description && task.due_date_time && task.priority) {
             props.handleSubmit(task, props.index);
-            setTask({ name: "", description: "", priority: "", dueDate: "" });
+            props.setEditDialogVisible(false);
+            //setTask({ name: "", description: "", priority: "", dueDate: "" });
         } else {
             props.showToast("error", "Error", "All fields must be filled in");
         }
