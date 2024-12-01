@@ -45,7 +45,7 @@ function findTaskByPriority(priority) {
     return taskModel.find({ priority: priority });
 }
 
-const updateTask = async(id, newtask) => {
+const updateTask = async (id, newtask) => {
     return taskModel.findByIdAndUpdate(id, newtask);
 };
 

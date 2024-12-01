@@ -6,7 +6,13 @@ function TableBody(props) {
     const tasks = props.taskData.map((row, index) => {
         return (
             <tbody key={row._id}>
-                <TableTask task={row} editEntry={props.editEntry} removeTask={props.removeTask} index={index} showToast={props.showToast}/>
+                <TableTask
+                    task={row}
+                    editEntry={props.editEntry}
+                    removeTask={props.removeTask}
+                    index={index}
+                    showToast={props.showToast}
+                />
             </tbody>
         );
     });
@@ -23,7 +29,12 @@ TableBody.propTypes = {
 function Table(props) {
     return (
         <table className="TaskTable">
-            <TableBody taskData={props.taskData} editEntry={props.editEntry} removeTask={props.removeTask} showToast={props.showToast}/>
+            <TableBody
+                taskData={props.taskData}
+                editEntry={props.editEntry}
+                removeTask={props.removeTask}
+                showToast={props.showToast}
+            />
         </table>
     );
 }

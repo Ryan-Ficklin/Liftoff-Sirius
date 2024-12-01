@@ -9,6 +9,8 @@ import logo from "../../assets/sirius-logo.svg";
 import ToggleButton from "../../components/ToggleButton.jsx";
 import no_tasks_img from "../../assets/no_tasks.svg";
 import AddTaskDialog from "../../components/AddTaskDialog.jsx";
+import { Dialog } from "primereact/dialog";
+import { Tag } from "primereact/tag";
 
 function TasksPage({ addAuthHeader, showToast }) {
     let navigate = useNavigate();
@@ -16,18 +18,23 @@ function TasksPage({ addAuthHeader, showToast }) {
     const [value, setValue] = useState(options[0]);
     const [createDialogVisible, setCreateDialogVisible] = useState(false);
     const [tasks, setTasks] = useState([]);
+    const [selectedTask, setSelectedTask] = useState({});
+    const [viewDialogPopupVisible, setViewDialogPopupVisible] = useState(false);
 
     useEffect(() => {
         getUserTasks();
     }, []);
 
     function getUserTasks() {
-        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/users/${localStorage.getItem("username")}/tasks`, {
-            method: "GET",
-            headers: addAuthHeader({
-                "Content-Type": "application/json" // Specify JSON format
-            })
-        })
+        fetch(
+            `https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/users/${localStorage.getItem("username")}/tasks`,
+            {
+                method: "GET",
+                headers: addAuthHeader({
+                    "Content-Type": "application/json" // Specify JSON format
+                })
+            }
+        )
             .then((res) => {
                 console.log(res);
                 if (res.status == 200) {
@@ -51,13 +58,16 @@ function TasksPage({ addAuthHeader, showToast }) {
         if (!token) {
             navigate("/login");
         } else {
-            fetch("https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/checkAuth", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json" // Specify JSON format
-                },
-                body: JSON.stringify({ authorization: `Bearer ${token}` })
-            }).then((res) => {
+            fetch(
+                "https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/checkAuth",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json" // Specify JSON format
+                    },
+                    body: JSON.stringify({ authorization: `Bearer ${token}` })
+                }
+            ).then((res) => {
                 console.log(res);
                 if (res.status != 200) {
                     navigate("/login");
@@ -77,14 +87,17 @@ function TasksPage({ addAuthHeader, showToast }) {
         const task = tasks[index];
         console.log(task);
 
-        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/${task["_id"]}`, {
-            method: "DELETE",
-            headers: addAuthHeader({
-                "Content-Type": "application/json", // Specify JSON format
-                user: localStorage.getItem("username")
-            }),
-            body: JSON.stringify(task)
-        }).then((res) => {
+        fetch(
+            `https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/${task["_id"]}`,
+            {
+                method: "DELETE",
+                headers: addAuthHeader({
+                    "Content-Type": "application/json", // Specify JSON format
+                    user: localStorage.getItem("username")
+                }),
+                body: JSON.stringify(task)
+            }
+        ).then((res) => {
             console.log(res);
             if (res.status == 204) {
                 /*setTasks([...tasks, task]);*/
@@ -96,19 +109,19 @@ function TasksPage({ addAuthHeader, showToast }) {
         });
         getUserTasks();
     }
-  
+
     // call this inside setTasks to always keep the tasklist sorted
-    // I think a priority queue would do this job better, but that is a 
+    // I think a priority queue would do this job better, but that is a
     // hassle with json, and this is ultimately not very expensive
-    function sortTasks(taskList){ 
+    function sortTasks(taskList) {
         taskList.sort((a, b) => {
-            if(a.priority ===  b.priority){
-                if(a.due_date_time > b.due_date_time){
+            if (a.priority === b.priority) {
+                if (a.due_date_time > b.due_date_time) {
                     return 1;
-                } else{
+                } else {
                     return -1;
                 }
-            } else if(a.priority > b.priority){
+            } else if (a.priority > b.priority) {
                 return -1;
             } else {
                 return 1;
@@ -119,14 +132,17 @@ function TasksPage({ addAuthHeader, showToast }) {
 
     function updateList(task) {
         console.log(task);
-        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks`, {
-            method: "POST",
-            headers: addAuthHeader({
-                "Content-Type": "application/json", // Specify JSON format
-                user: localStorage.getItem("username")
-            }),
-            body: JSON.stringify(task)
-        }).then((res) => {
+        fetch(
+            `https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks`,
+            {
+                method: "POST",
+                headers: addAuthHeader({
+                    "Content-Type": "application/json", // Specify JSON format
+                    user: localStorage.getItem("username")
+                }),
+                body: JSON.stringify(task)
+            }
+        ).then((res) => {
             console.log(res);
             if (res.status == 201) {
                 /*setTasks([...tasks, task]);*/
@@ -142,15 +158,18 @@ function TasksPage({ addAuthHeader, showToast }) {
         console.log(newtask);
         const task = tasks[index];
         console.log(task);
-        
-        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/${task["_id"]}`, {
-            method: "PUT",
-            headers: addAuthHeader({
-                "Content-Type": "application/json", // Specify JSON format
-                user: localStorage.getItem("username")
-            }),
-            body: JSON.stringify(newtask)
-        }).then((res) => {
+
+        fetch(
+            `https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/${task["_id"]}`,
+            {
+                method: "PUT",
+                headers: addAuthHeader({
+                    "Content-Type": "application/json", // Specify JSON format
+                    user: localStorage.getItem("username")
+                }),
+                body: JSON.stringify(newtask)
+            }
+        ).then((res) => {
             console.log(res);
             if (res.status == 204) {
                 /*setTasks([...tasks, task]);*/
@@ -245,7 +264,12 @@ function TasksPage({ addAuthHeader, showToast }) {
                 <section>
                     {tasks.length != 0 ? (
                         <div>
-                            <Table taskData={tasks} editEntry={editEntry} removeTask={removeOneTask} showToast={showToast}/>
+                            <Table
+                                taskData={tasks}
+                                editEntry={editEntry}
+                                removeTask={removeOneTask}
+                                showToast={showToast}
+                            />
                         </div>
                     ) : (
                         <div>
@@ -273,13 +297,52 @@ function TasksPage({ addAuthHeader, showToast }) {
                 /* Calendar View Section */
                 <section className="select">
                     <div className="container">
+                        <Dialog
+                            visible={viewDialogPopupVisible}
+                            closable={true}
+                            draggable={false}
+                            header="View Task"
+                            style={{ width: "50vw" }}
+                            className="create-task-dialog"
+                            onHide={() => {
+                                setViewDialogPopupVisible(false);
+                            }}>
+                            <div className="d-flex justify-content-between">
+                                <div className="task-name">{selectedTask.name}</div>
+                            </div>
+
+                            <p className="description">{selectedTask.description}</p>
+
+                            <div className="d-flex">
+                                <Tag className="date-tag" icon="pi pi-calendar">
+                                    {new Date(
+                                        selectedTask.due_date_time
+                                    ).toLocaleDateString("en-US")}
+                                </Tag>
+                                <div style={{ width: "1rem" }}></div>
+                                <Tag severity="warning" className="tag">
+                                    Priority {selectedTask.priority}
+                                </Tag>
+                            </div>
+                        </Dialog>
+
                         <FullCalendar
                             plugins={[dayGridPlugin]}
                             initialView="dayGridMonth"
+                            eventClick={(arg) => {
+                                const selected = tasks.find(
+                                    (x) => x._id === arg.event.id
+                                );
+                                setSelectedTask(selected);
+                                setViewDialogPopupVisible(true);
+                                console.log(selected);
+                                //console.log(arg.event.id)
+                            }}
                             events={
                                 tasks.map((x) => ({
                                     title: x.name,
-                                    date: x.due_date_time.split("T")[0]
+                                    date: x.due_date_time.split("T")[0],
+                                    id: x._id
                                 }))
                                 /*{ title: 'Turn in TE 1 helloooooooooo', date: '2024-11-12', start: new Date('2024-11-12 20:00:00'), end: new Date('2024-11-13 01:00:00') },
                                 { title: 'event 2 turn in teeeeeee', date: '2024-11-13', start: new Date('2024-11-13 10:00:00')}*/

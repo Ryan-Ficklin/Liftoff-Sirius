@@ -215,3 +215,20 @@
     font-size: 16px;
     font-weight: 500;
 }
+
+.task-name {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+}
+
+.description {
+    color: rgb(170, 170, 170);
+}
+
+.p-dialog-title {
+    font-weight: 500;
+    font-size: 18px;
+}
