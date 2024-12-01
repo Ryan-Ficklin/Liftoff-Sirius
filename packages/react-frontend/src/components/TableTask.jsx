@@ -13,7 +13,7 @@ function TableTask(props) {
             <EditTaskDialog
                 handleSubmit={props.editEntry}
                 data={task}
-                index = {props.index}
+                index={props.index}
                 editDialogVisible={editDialogVisible}
                 setEditDialogVisible={setEditDialogVisible}
                 showToast={props.showToast}
@@ -29,9 +29,7 @@ function TableTask(props) {
                 <Tag className="date-tag" icon="pi pi-calendar">
                     {new Date(task.due_date_time).toLocaleDateString("en-US")}
                 </Tag>
-                <button
-                    className="delete-btn"
-                    onClick={() => setEditDialogVisible(true)}>
+                <button className="delete-btn" onClick={() => setEditDialogVisible(true)}>
                     Edit
                 </button>
                 <button

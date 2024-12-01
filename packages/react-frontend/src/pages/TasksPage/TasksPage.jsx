@@ -22,12 +22,15 @@ function TasksPage({ addAuthHeader, showToast }) {
     }, []);
 
     function getUserTasks() {
-        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/users/${localStorage.getItem("username")}/tasks`, {
-            method: "GET",
-            headers: addAuthHeader({
-                "Content-Type": "application/json" // Specify JSON format
-            })
-        })
+        fetch(
+            `https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/users/${localStorage.getItem("username")}/tasks`,
+            {
+                method: "GET",
+                headers: addAuthHeader({
+                    "Content-Type": "application/json" // Specify JSON format
+                })
+            }
+        )
             .then((res) => {
                 console.log(res);
                 if (res.status == 200) {
@@ -51,13 +54,16 @@ function TasksPage({ addAuthHeader, showToast }) {
         if (!token) {
             navigate("/login");
         } else {
-            fetch("https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/checkAuth", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json" // Specify JSON format
-                },
-                body: JSON.stringify({ authorization: `Bearer ${token}` })
-            }).then((res) => {
+            fetch(
+                "https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/checkAuth",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json" // Specify JSON format
+                    },
+                    body: JSON.stringify({ authorization: `Bearer ${token}` })
+                }
+            ).then((res) => {
                 console.log(res);
                 if (res.status != 200) {
                     navigate("/login");
@@ -77,14 +83,17 @@ function TasksPage({ addAuthHeader, showToast }) {
         const task = tasks[index];
         console.log(task);
 
-        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/${task["_id"]}`, {
-            method: "DELETE",
-            headers: addAuthHeader({
-                "Content-Type": "application/json", // Specify JSON format
-                user: localStorage.getItem("username")
-            }),
-            body: JSON.stringify(task)
-        }).then((res) => {
+        fetch(
+            `https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/${task["_id"]}`,
+            {
+                method: "DELETE",
+                headers: addAuthHeader({
+                    "Content-Type": "application/json", // Specify JSON format
+                    user: localStorage.getItem("username")
+                }),
+                body: JSON.stringify(task)
+            }
+        ).then((res) => {
             console.log(res);
             if (res.status == 204) {
                 /*setTasks([...tasks, task]);*/
@@ -96,19 +105,19 @@ function TasksPage({ addAuthHeader, showToast }) {
         });
         getUserTasks();
     }
-  
+
     // call this inside setTasks to always keep the tasklist sorted
-    // I think a priority queue would do this job better, but that is a 
+    // I think a priority queue would do this job better, but that is a
     // hassle with json, and this is ultimately not very expensive
-    function sortTasks(taskList){ 
+    function sortTasks(taskList) {
         taskList.sort((a, b) => {
-            if(a.priority ===  b.priority){
-                if(a.due_date_time > b.due_date_time){
+            if (a.priority === b.priority) {
+                if (a.due_date_time > b.due_date_time) {
                     return 1;
-                } else{
+                } else {
                     return -1;
                 }
-            } else if(a.priority > b.priority){
+            } else if (a.priority > b.priority) {
                 return -1;
             } else {
                 return 1;
@@ -119,14 +128,17 @@ function TasksPage({ addAuthHeader, showToast }) {
 
     function updateList(task) {
         console.log(task);
-        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks`, {
-            method: "POST",
-            headers: addAuthHeader({
-                "Content-Type": "application/json", // Specify JSON format
-                user: localStorage.getItem("username")
-            }),
-            body: JSON.stringify(task)
-        }).then((res) => {
+        fetch(
+            `https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks`,
+            {
+                method: "POST",
+                headers: addAuthHeader({
+                    "Content-Type": "application/json", // Specify JSON format
+                    user: localStorage.getItem("username")
+                }),
+                body: JSON.stringify(task)
+            }
+        ).then((res) => {
             console.log(res);
             if (res.status == 201) {
                 /*setTasks([...tasks, task]);*/
@@ -142,15 +154,18 @@ function TasksPage({ addAuthHeader, showToast }) {
         console.log(newtask);
         const task = tasks[index];
         console.log(task);
-        
-        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/${task["_id"]}`, {
-            method: "PUT",
-            headers: addAuthHeader({
-                "Content-Type": "application/json", // Specify JSON format
-                user: localStorage.getItem("username")
-            }),
-            body: JSON.stringify(newtask)
-        }).then((res) => {
+
+        fetch(
+            `https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/${task["_id"]}`,
+            {
+                method: "PUT",
+                headers: addAuthHeader({
+                    "Content-Type": "application/json", // Specify JSON format
+                    user: localStorage.getItem("username")
+                }),
+                body: JSON.stringify(newtask)
+            }
+        ).then((res) => {
             console.log(res);
             if (res.status == 204) {
                 /*setTasks([...tasks, task]);*/
@@ -245,7 +260,12 @@ function TasksPage({ addAuthHeader, showToast }) {
                 <section>
                     {tasks.length != 0 ? (
                         <div>
-                            <Table taskData={tasks} editEntry={editEntry} removeTask={removeOneTask} showToast={showToast}/>
+                            <Table
+                                taskData={tasks}
+                                editEntry={editEntry}
+                                removeTask={removeOneTask}
+                                showToast={showToast}
+                            />
                         </div>
                     ) : (
                         <div>
