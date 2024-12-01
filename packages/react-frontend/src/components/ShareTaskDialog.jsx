@@ -41,7 +41,7 @@ function ShareTaskDialog(props) {
                 header="Share Task"
                 visible={props.shareDialogVisible}
                 style={{ width: "25vw" }}
-                className="share-task-dialog"
+                className="create-task-dialog"
                 onHide={() => {
                     if (!props.shareDialogVisible) return;
                     props.setShareDialogVisible(false);

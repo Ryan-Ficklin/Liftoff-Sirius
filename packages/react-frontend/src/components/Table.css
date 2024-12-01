@@ -51,12 +51,12 @@
 .delete-btn {
     margin-right: 1rem;
     margin-top: 1rem;
-    font-size: 16px;
+    font-size: 14px;
     border: 1px solid white;
     outline: none;
     margin-bottom: 1rem;
     border-radius: 5px;
-    padding-inline: 2rem;
+    padding-inline: 0.7rem;
     padding-block: 0.2rem;
     background-color: transparent;
     color: white;
