@@ -143,8 +143,7 @@ function TasksPage({ addAuthHeader, showToast }) {
         //const task = tasks[index];
         console.log(id);
         console.log(otherUsername);
-        //fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/share`, {
-        fetch(`http://localhost:8000/tasks/share`, {
+        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/share`, {
             method: "POST",
             headers: addAuthHeader({
                 "Content-Type": "application/json", // Specify JSON format
