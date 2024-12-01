@@ -302,7 +302,7 @@ function TasksPage({ addAuthHeader, showToast }) {
                             closable={true}
                             draggable={false}
                             header="View Task"
-                            style={{ width: "50vw" }}
+                            style={{ width: "fit-content" }}
                             className="create-task-dialog"
                             onHide={() => {
                                 setViewDialogPopupVisible(false);
