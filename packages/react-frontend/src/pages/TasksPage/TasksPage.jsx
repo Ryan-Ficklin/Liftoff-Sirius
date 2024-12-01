@@ -52,6 +52,7 @@ function TasksPage({ addAuthHeader, showToast }) {
             navigate("/login");
         } else {
             fetch("https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/checkAuth", {
+            //fetch("localhost:8000/checkAuth", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json" // Specify JSON format
@@ -138,22 +139,23 @@ function TasksPage({ addAuthHeader, showToast }) {
         });
     }
 
-    function shareTask(task, otherUsername) {
-        console.log(task)
-        console.log(otherUsername)
-        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/share`, {
+    function shareTask(otherUsername, id) {
+        //const task = tasks[index];
+        console.log(id);
+        console.log(otherUsername);
+        //fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/share`, {
+        fetch(`http://localhost:8000/tasks/share`, {
             method: "POST",
             headers: addAuthHeader({
                 "Content-Type": "application/json", // Specify JSON format
                 user: localStorage.getItem("username")
             }),
-            body: JSON.stringify({task: task, username: otherUsername})
+            body: JSON.stringify({task: id, username: otherUsername})
         }).then((res) => {
             console.log(res)
             if (res.status === 201) {
-                setShareDialogVisible(false);
             } else {
-                showToast("error", "Error", "Failed to share task")
+                showToast("error", "Error", "Failed to share task");
             }
         });
     }
@@ -266,7 +268,7 @@ function TasksPage({ addAuthHeader, showToast }) {
                 <section>
                     {tasks.length != 0 ? (
                         <div>
-                            <Table taskData={tasks} editEntry={editEntry} removeTask={removeOneTask} showToast={showToast}/>
+                            <Table taskData={tasks} shareTask={shareTask} editEntry={editEntry} removeTask={removeOneTask} showToast={showToast}/>
                         </div>
                     ) : (
                         <div>

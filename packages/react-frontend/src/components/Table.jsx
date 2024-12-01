@@ -6,7 +6,7 @@ function TableBody(props) {
     const tasks = props.taskData.map((row, index) => {
         return (
             <tbody key={row._id}>
-                <TableTask task={row} editEntry={props.editEntry} removeTask={props.removeTask} index={index} showToast={props.showToast}/>
+                <TableTask task={row} editEntry={props.editEntry} shareTask={props.shareTask} removeTask={props.removeTask} index={index} showToast={props.showToast}/>
             </tbody>
         );
     });
@@ -16,6 +16,7 @@ function TableBody(props) {
 TableBody.propTypes = {
     taskData: PropTypes.array.isRequired,
     editEntry: PropTypes.func.isRequired,
+    shareTask: PropTypes.func.isRequired,
     removeTask: PropTypes.func.isRequired,
     showToast: PropTypes.func.isRequired
 };
@@ -23,7 +24,7 @@ TableBody.propTypes = {
 function Table(props) {
     return (
         <table className="TaskTable">
-            <TableBody taskData={props.taskData} editEntry={props.editEntry} removeTask={props.removeTask} showToast={props.showToast}/>
+            <TableBody taskData={props.taskData} editEntry={props.editEntry} shareTask={props.shareTask} removeTask={props.removeTask} showToast={props.showToast}/>
         </table>
     );
 }
@@ -32,6 +33,7 @@ function Table(props) {
 Table.propTypes = {
     taskData: PropTypes.array.isRequired,
     editEntry: PropTypes.func.isRequired,
+    shareTask: PropTypes.func.isRequired,
     removeTask: PropTypes.func.isRequired,
     showToast: PropTypes.func.isRequired
 };

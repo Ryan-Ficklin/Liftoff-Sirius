@@ -184,6 +184,8 @@ app.post("/tasks", authenticateUser, async (req, res) => {
 app.post("/tasks/share", async (req, res) => {
     const task = req.body["task"];
     const username = req.body["username"];
+    console.log(task)
+    console.log(username)
     if (!username) {
         res.status(404).send("User not found, include valid username");
     } else if (!task) {

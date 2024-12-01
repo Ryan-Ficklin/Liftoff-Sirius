@@ -3,10 +3,13 @@ import { useState } from "react";
 import "./Table.css";
 import { Tag } from "primereact/tag";
 import EditTaskDialog from "./EditTaskDialog";
+import ShareTaskDialog from "./ShareTaskDialog";
 
 function TableTask(props) {
+    console.log(props.shareTask)
     const task = props.task;
     const [editDialogVisible, setEditDialogVisible] = useState(false);
+    const [shareDialogVisible, setShareDialogVisible] = useState(false);
 
     return (
         <div className="TableTask">
@@ -16,6 +19,14 @@ function TableTask(props) {
                 index = {props.index}
                 editDialogVisible={editDialogVisible}
                 setEditDialogVisible={setEditDialogVisible}
+                showToast={props.showToast}
+            />
+            <ShareTaskDialog
+                handleSubmit={props.shareTask}
+                data={task["_id"]}
+                index={props.index}
+                shareDialogVisible={shareDialogVisible}
+                setShareDialogVisible={setShareDialogVisible}
                 showToast={props.showToast}
             />
             <div className="d-flex justify-content-between">
@@ -36,6 +47,11 @@ function TableTask(props) {
                 </button>
                 <button
                     className="delete-btn"
+                    onClick={() => setShareDialogVisible(true)}>
+                    Share
+                </button>
+                <button
+                    className="delete-btn"
                     onClick={() => props.removeTask(props.index)}>
                     Delete
                 </button>
@@ -49,6 +65,7 @@ TableTask.propTypes = {
     task: PropTypes.object.isRequired,
     index: PropTypes.any.isRequired,
     editEntry: PropTypes.func.isRequired,
+    shareTask: PropTypes.func.isRequired,
     removeTask: PropTypes.func.isRequired,
     showToast: PropTypes.func.isRequired
 };
