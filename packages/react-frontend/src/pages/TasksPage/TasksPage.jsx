@@ -138,6 +138,27 @@ function TasksPage({ addAuthHeader, showToast }) {
         });
     }
 
+    function shareTask(task, otherUsername) {
+        console.log(task)
+        console.log(otherUsername)
+        fetch(`https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/tasks/share`, {
+            method: "POST",
+            headers: addAuthHeader({
+                "Content-Type": "application/json", // Specify JSON format
+                user: localStorage.getItem("username")
+            }),
+            body: JSON.stringify({task: task, username: otherUsername})
+        }).then((res) => {
+            console.log(res)
+            if (res.status === 201) {
+                setShareDialogVisible(false);
+            } else {
+                showToast("error", "Error", "Failed to share task")
+            }
+        });
+    }
+    
+
     function editEntry(newtask, index) {
         console.log(newtask);
         const task = tasks[index];
