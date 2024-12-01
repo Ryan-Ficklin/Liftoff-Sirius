@@ -42,6 +42,7 @@ function App() {
                             />
                         }
                     />
+                    <Route path="/" element={<LoginPage showToast={showToast} />} />
                     <Route path="/login" element={<LoginPage showToast={showToast} />} />
                     <Route
                         path="/signup"

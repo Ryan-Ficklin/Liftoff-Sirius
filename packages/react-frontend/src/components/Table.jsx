@@ -5,23 +5,25 @@ import "./Table.css";
 function TableBody(props) {
     const tasks = props.taskData.map((row, index) => {
         return (
-            <div key={index}>
-                <TableTask task={row} removeTask={props.removeTask} index={index} />
-            </div>
+            <tbody key={row._id}>
+                <TableTask task={row} editEntry={props.editEntry} removeTask={props.removeTask} index={index} showToast={props.showToast}/>
+            </tbody>
         );
     });
-    return <tbody>{tasks}</tbody>;
+    return tasks;
 }
 
 TableBody.propTypes = {
     taskData: PropTypes.array.isRequired,
-    removeTask: PropTypes.func.isRequired
+    editEntry: PropTypes.func.isRequired,
+    removeTask: PropTypes.func.isRequired,
+    showToast: PropTypes.func.isRequired
 };
 
 function Table(props) {
     return (
         <table className="TaskTable">
-            <TableBody taskData={props.taskData} removeTask={props.removeTask} />
+            <TableBody taskData={props.taskData} editEntry={props.editEntry} removeTask={props.removeTask} showToast={props.showToast}/>
         </table>
     );
 }
@@ -29,7 +31,9 @@ function Table(props) {
 // Validate the props
 Table.propTypes = {
     taskData: PropTypes.array.isRequired,
-    removeTask: PropTypes.func.isRequired
+    editEntry: PropTypes.func.isRequired,
+    removeTask: PropTypes.func.isRequired,
+    showToast: PropTypes.func.isRequired
 };
 
 export default Table;

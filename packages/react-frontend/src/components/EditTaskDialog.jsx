@@ -3,13 +3,8 @@ import { useState } from "react";
 import { Calendar } from "primereact/calendar";
 import { Dialog } from "primereact/dialog";
 
-function AddTaskDialog(props) {
-    const [task, setTask] = useState({
-        name: "",
-        description: "",
-        priority: "",
-        due_date_time: ""
-    });
+function EditTaskDialog(props) {
+    const [task, setTask] = useState(props.data);
 
     function handleChange(event) {
         console.log(event);
@@ -53,8 +48,9 @@ function AddTaskDialog(props) {
     function submitForm() {
         console.log(task);
         if (task.name && task.description && task.due_date_time && task.priority) {
-            props.handleSubmit(task);
-            setTask({ name: "", description: "", priority: "", due_date_time: "" });
+            props.handleSubmit(task, props.index);
+            props.setEditDialogVisible(false);
+            //setTask({ name: "", description: "", priority: "", dueDate: "" });
         } else {
             props.showToast("error", "Error", "All fields must be filled in");
         }
@@ -63,13 +59,13 @@ function AddTaskDialog(props) {
     return (
         <form>
             <Dialog
-                header="Create Task"
-                visible={props.createDialogVisible}
+                header="Edit Task"
+                visible={props.editDialogVisible}
                 style={{ width: "25vw" }}
                 className="create-task-dialog"
                 onHide={() => {
-                    if (!props.createDialogVisible) return;
-                    props.setCreateDialogVisible(false);
+                    if (!props.editDialogVisible) return;
+                    props.setEditDialogVisible(false);
                 }}>
                 <div className="dialog-content-section">
                     <p className="dialog-input-helper">Task name</p>
@@ -113,7 +109,7 @@ function AddTaskDialog(props) {
                     />
 
                     <button className="dialog-add-task-btn" onClick={submitForm}>
-                        Add Task
+                        Update Task
                     </button>
                 </div>
             </Dialog>
@@ -122,11 +118,13 @@ function AddTaskDialog(props) {
 }
 
 // Validate the props
-AddTaskDialog.propTypes = {
+EditTaskDialog.propTypes = {
     handleSubmit: PropTypes.func.isRequired, // expects a function
-    createDialogVisible: PropTypes.bool.isRequired,
-    setCreateDialogVisible: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired,
+    index: PropTypes.any.isRequired,
+    editDialogVisible: PropTypes.bool.isRequired,
+    setEditDialogVisible: PropTypes.func.isRequired,
     showToast: PropTypes.func.isRequired
 };
 
-export default AddTaskDialog;
+export default EditTaskDialog;
