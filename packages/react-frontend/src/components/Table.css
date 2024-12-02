@@ -27,6 +27,7 @@
     margin-left: 1rem;
     margin-top: 1rem;
     background-color: #147fff;
+    margin-bottom: 1rem;
 }
 
 .TableTask {
@@ -51,12 +52,12 @@
 .delete-btn {
     margin-right: 1rem;
     margin-top: 1rem;
-    font-size: 14px;
+    font-size: 16px;
     border: 1px solid white;
     outline: none;
     margin-bottom: 1rem;
     border-radius: 5px;
-    padding-inline: 0.7rem;
+    padding-inline: 2rem;
     padding-block: 0.2rem;
     background-color: transparent;
     color: white;
@@ -66,4 +67,14 @@
 .delete-btn:hover {
     background-color: #8f8f8f;
     border: 1px solid #147fff;
+}
+
+.icon{
+    margin-right: 1rem;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.trash-icon:hover{
+    color: rgb(223, 76, 76);
 }
