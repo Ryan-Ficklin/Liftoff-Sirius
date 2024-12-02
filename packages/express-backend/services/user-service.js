@@ -30,6 +30,10 @@ function addUser(user) {
     return promise;
 }
 
+function addTaskIDToUser(username, taskID) {
+    return userModel.updateOne({ username: username }, { $push: { task_list: taskID } });
+}
+
 const deleteUser = (username) => {
     findOneandDelete({ username: username });
 };
@@ -55,5 +59,6 @@ export default {
     getUsers,
     findUserByUsername,
     findUserByTask,
-    deleteUser
+    deleteUser,
+    addTaskIDToUser
 };

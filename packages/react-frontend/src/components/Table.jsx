@@ -9,6 +9,7 @@ function TableBody(props) {
                 <TableTask
                     task={row}
                     editEntry={props.editEntry}
+                    shareTask={props.shareTask}
                     removeTask={props.removeTask}
                     index={index}
                     showToast={props.showToast}
@@ -22,6 +23,7 @@ function TableBody(props) {
 TableBody.propTypes = {
     taskData: PropTypes.array.isRequired,
     editEntry: PropTypes.func.isRequired,
+    shareTask: PropTypes.func.isRequired,
     removeTask: PropTypes.func.isRequired,
     showToast: PropTypes.func.isRequired
 };
@@ -32,6 +34,7 @@ function Table(props) {
             <TableBody
                 taskData={props.taskData}
                 editEntry={props.editEntry}
+                shareTask={props.shareTask}
                 removeTask={props.removeTask}
                 showToast={props.showToast}
             />
@@ -43,6 +46,7 @@ function Table(props) {
 Table.propTypes = {
     taskData: PropTypes.array.isRequired,
     editEntry: PropTypes.func.isRequired,
+    shareTask: PropTypes.func.isRequired,
     removeTask: PropTypes.func.isRequired,
     showToast: PropTypes.func.isRequired
 };

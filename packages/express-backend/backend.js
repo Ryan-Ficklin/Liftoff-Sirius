@@ -181,6 +181,24 @@ app.post("/tasks", authenticateUser, async (req, res) => {
     }
 });
 
+app.post("/tasks/share", authenticateUser, async (req, res) => {
+    const task = req.body["task"];
+    const username = req.body["username"];
+    console.log(task);
+    console.log(username);
+    if (!username) {
+        res.status(404).send("User not found, include valid username");
+    } else if (!task) {
+        res.status(404).send("Task not found, include task ID");
+    } else {
+        //const other_user = userService.findUserByUsername(username);
+        // eventually make sure only owner of task can share task
+        // if (task_obj["owner"] == )
+        const ret = await userService.addTaskIDToUser(username, task);
+        res.status(201).json(ret);
+    }
+});
+
 app.post("/events", authenticateUser, async (req, res) => {
     const eventToAdd = req.body;
     // const addedEvent = addEvent(eventToAdd);
