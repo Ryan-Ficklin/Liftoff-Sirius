@@ -163,17 +163,17 @@ describe("The Happy Path", () => {
         // go back to do list
         cy.get('button[class="toggle-option "]').click();
 
-        // edit specifically task1 to make it higher priority
+        //edit specifically task1 to make it higher priority
         cy.contains(".task-name", testdata.task1_name) // find the task with task1's name
             .closest(".TableTask") // find the closest parent task container
-            .find("button.delete-btn") // find all buttons with class "delete-btn" (both "Edit" and "Delete")
-            .first() // select the first button (which would always be edit)
+            .find('i[class="icon pi pi-pen-to-square"]') // find the edit button
             .click();
+        
         // clear the field so that it deletes the exisiting priority
         cy.get('input[name="priority"]').clear().type(testdata.task1_new_priority);
         cy.get('button[class="dialog-add-task-btn"]').click();
         // wait for a half second for the tasks to change (clunky, but it will do)
-        cy.wait(500);
+        cy.wait(1000);
         // now task1 should appear before task2
         cy.get(".TableTask").then((tasks) => {
             const taskArray = [...tasks];
@@ -189,13 +189,11 @@ describe("The Happy Path", () => {
         // selecting delete is the same as edit but with the second delete button instead of the first
         cy.contains(".task-name", testdata.task1_name)
             .closest(".TableTask")
-            .find("button.delete-btn")
-            .eq(1) // this is essentially second(), first get its own special function
+            .find('i[class="trash-icon icon pi pi-trash"]') // find delete button
             .click();
         cy.contains(".task-name", testdata.task2_name)
             .closest(".TableTask")
-            .find("button.delete-btn")
-            .eq(1)
+            .find('i[class="trash-icon icon pi pi-trash"]')
             .click();
     });
 });
