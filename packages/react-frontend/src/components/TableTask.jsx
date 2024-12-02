@@ -29,7 +29,6 @@ function TableTask(props) {
                 <Tag className="date-tag" icon="pi pi-calendar">
                     {new Date(task.due_date_time).toLocaleDateString("en-US")}
                 </Tag>
-
                 <div className="d-flex align-items-center">
                     <i className="icon pi pi-pen-to-square" onClick={() => setEditDialogVisible(true)}></i>
                     <i className="trash-icon icon pi pi-trash" onClick={() => props.removeTask(props.index)}></i>
