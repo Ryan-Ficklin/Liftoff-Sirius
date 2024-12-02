@@ -195,5 +195,7 @@ describe("The Happy Path", () => {
             .closest(".TableTask")
             .find('i[class="trash-icon icon pi pi-trash"]')
             .click();
+
+        cy.get('button[class="logout-btn"]').click();
     });
 });
