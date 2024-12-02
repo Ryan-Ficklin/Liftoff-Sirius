@@ -181,7 +181,7 @@ app.post("/tasks", authenticateUser, async (req, res) => {
     }
 });
 
-app.post("/tasks/share", async (req, res) => {
+app.post("/tasks/share", authenticateUser, async (req, res) => {
     const task = req.body["task"];
     const username = req.body["username"];
     console.log(task);
