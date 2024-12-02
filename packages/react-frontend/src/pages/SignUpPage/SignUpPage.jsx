@@ -1,7 +1,7 @@
 import logo from "../../assets/sirius-logo.svg";
 import "./SignUpPage.css";
 import { InputText } from "primereact/inputtext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -11,6 +11,32 @@ function LoginPage({ showToast }) {
     const [email, setEmail] = useState("");
     const [btnEnabled, setBtnEnabled] = useState(true);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src = "https://smtpjs.com/v3/smtp.js";
+        script.async = true;
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
+    
+    const sendEmail = () => {
+        window.Email.send({
+            SecureToken: "476bb72c-c256-4a0d-b624-0cea4d2f9147",
+
+            To: email,      //this only works if you pay for it, but can send to the registered email 
+            From: "sirius.noreply5@gmail.com",
+            Subject: "Sirius Sign Up",
+            Body: "Thanks for creating an account with Sirius!"
+        }).then((message) => {
+            console.log("Email sent response:", message);
+            alert("Successful email sent");
+        })
+        .catch ((error) => console.error("Failed email send", error));
+    };
 
     function signup() {
         setBtnEnabled(false);
@@ -53,6 +79,7 @@ function LoginPage({ showToast }) {
                     );
                     let token = data["token"];
                     localStorage.setItem("token", token);
+                    sendEmail();
                     navigate("/tasks");
                 })
                 .catch((error) => {
@@ -69,7 +96,7 @@ function LoginPage({ showToast }) {
     return (
         <div className="body">
             <div className="d-flex justify-content-center login-section">
-                <div>
+                <form onSubmit= {(e) => {e.preventDefault(); signup();}}>
                     <center>
                         <img src={logo} className="img" />
                     </center>
@@ -118,7 +145,7 @@ function LoginPage({ showToast }) {
                             Sign Up
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );

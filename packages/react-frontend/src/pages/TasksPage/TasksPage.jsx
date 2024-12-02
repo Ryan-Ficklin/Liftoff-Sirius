@@ -276,7 +276,14 @@ function TasksPage({ addAuthHeader, showToast }) {
                         <i className="pi pi-plus" style={{ color: "white" }}></i>
                     </button>
                 </div>
-
+                <button
+                    className="logout-btn"
+                    onClick={() => {
+                        localStorage.removeItem("token");
+                        navigate("/login");
+                    }}>
+                    Logout
+                </button>
                 <div className="toggle">
                     <ToggleButton onToggle={handleToggle} />
                 </div>
