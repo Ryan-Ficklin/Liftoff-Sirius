@@ -6,7 +6,8 @@
         "test": "echo \"Error: no test specified\"",
         "start": "npm run -w react-frontend dev",
         "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-        "lint": "npm run format"
+        "lint": "npm run format",
+        "cy:open": "cypress open"
     },
     "repository": {
         "type": "git",
@@ -19,6 +20,7 @@
         "packages/*"
     ],
     "devDependencies": {
+        "cypress": "^13.16.0",
         "prettier": "^3.3.3"
     },
     "dependencies": {

@@ -9,6 +9,8 @@ import logo from "../../assets/sirius-logo.svg";
 import ToggleButton from "../../components/ToggleButton.jsx";
 import no_tasks_img from "../../assets/no_tasks.svg";
 import AddTaskDialog from "../../components/AddTaskDialog.jsx";
+import { Dialog } from "primereact/dialog";
+import { Tag } from "primereact/tag";
 
 function TasksPage({ addAuthHeader, showToast }) {
     let navigate = useNavigate();
@@ -16,6 +18,8 @@ function TasksPage({ addAuthHeader, showToast }) {
     const [value, setValue] = useState(options[0]);
     const [createDialogVisible, setCreateDialogVisible] = useState(false);
     const [tasks, setTasks] = useState([]);
+    const [selectedTask, setSelectedTask] = useState({});
+    const [viewDialogPopupVisible, setViewDialogPopupVisible] = useState(false);
 
     useEffect(() => {
         getUserTasks();
@@ -57,7 +61,6 @@ function TasksPage({ addAuthHeader, showToast }) {
             fetch(
                 "https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/checkAuth",
                 {
-                    //fetch("localhost:8000/checkAuth", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json" // Specify JSON format
@@ -318,13 +321,52 @@ function TasksPage({ addAuthHeader, showToast }) {
                 /* Calendar View Section */
                 <section className="select">
                     <div className="container">
+                        <Dialog
+                            visible={viewDialogPopupVisible}
+                            closable={true}
+                            draggable={false}
+                            header="View Task"
+                            style={{ width: "fit-content" }}
+                            className="create-task-dialog"
+                            onHide={() => {
+                                setViewDialogPopupVisible(false);
+                            }}>
+                            <div className="d-flex justify-content-between">
+                                <div className="task-name">{selectedTask.name}</div>
+                            </div>
+
+                            <p className="description">{selectedTask.description}</p>
+
+                            <div className="d-flex">
+                                <Tag className="date-tag" icon="pi pi-calendar">
+                                    {new Date(
+                                        selectedTask.due_date_time
+                                    ).toLocaleDateString("en-US")}
+                                </Tag>
+                                <div style={{ width: "1rem" }}></div>
+                                <Tag severity="warning" className="tag">
+                                    Priority {selectedTask.priority}
+                                </Tag>
+                            </div>
+                        </Dialog>
+
                         <FullCalendar
                             plugins={[dayGridPlugin]}
                             initialView="dayGridMonth"
+                            eventClick={(arg) => {
+                                const selected = tasks.find(
+                                    (x) => x._id === arg.event.id
+                                );
+                                setSelectedTask(selected);
+                                setViewDialogPopupVisible(true);
+                                console.log(selected);
+                                //console.log(arg.event.id)
+                            }}
                             events={
                                 tasks.map((x) => ({
                                     title: x.name,
-                                    date: x.due_date_time.split("T")[0]
+                                    date: x.due_date_time.split("T")[0],
+                                    id: x._id
                                 }))
                                 /*{ title: 'Turn in TE 1 helloooooooooo', date: '2024-11-12', start: new Date('2024-11-12 20:00:00'), end: new Date('2024-11-13 01:00:00') },
                                 { title: 'event 2 turn in teeeeeee', date: '2024-11-13', start: new Date('2024-11-13 10:00:00')}*/

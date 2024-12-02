@@ -53,6 +53,10 @@ function TableTask(props) {
                     onClick={() => props.removeTask(props.index)}>
                     Delete
                 </button>
+                <div className="d-flex align-items-center">
+                    <i className="icon pi pi-pen-to-square" onClick={() => setEditDialogVisible(true)}></i>
+                    <i className="trash-icon icon pi pi-trash" onClick={() => props.removeTask(props.index)}></i>
+                </div>
             </div>
         </div>
     );
