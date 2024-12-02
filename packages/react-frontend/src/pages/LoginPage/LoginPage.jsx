@@ -22,13 +22,16 @@ function LoginPage({ showToast }) {
             console.log("works");
 
             // Backend call
-            fetch("https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json" // Specify JSON format
-                },
-                body: JSON.stringify(user)
-            })
+            fetch(
+                "https://liftoff-sirius-fsefevfha8cfecgx.westus2-01.azurewebsites.net/login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json" // Specify JSON format
+                    },
+                    body: JSON.stringify(user)
+                }
+            )
                 .then((res) => {
                     console.log(res);
                     if (res.status != 200) {
