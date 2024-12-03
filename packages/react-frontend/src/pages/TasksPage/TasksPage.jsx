@@ -171,6 +171,7 @@ function TasksPage({ addAuthHeader, showToast }) {
         ).then((res) => {
             console.log(res);
             if (res.status === 201) {
+                showToast("success", "Success", "Task shared!")
             } else {
                 showToast("error", "Error", "Failed to share task");
             }
@@ -195,7 +196,6 @@ function TasksPage({ addAuthHeader, showToast }) {
         ).then((res) => {
             console.log(res);
             if (res.status == 204) {
-                /*setTasks([...tasks, task]);*/
                 getUserTasks();
                 setCreateDialogVisible(false);
             } else {

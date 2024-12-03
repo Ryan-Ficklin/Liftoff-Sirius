@@ -3,10 +3,10 @@ import { useState } from "react";
 import { Dialog } from "primereact/dialog";
 
 function ShareTaskDialog(props) {
-    console.log(props.data);
+    // console.log(props.data);
     const [task, setTask] = useState({
         name: "",
-        id: props.data
+        id: props.data["_id"]
     });
 
     function handleChange(event) {
@@ -28,7 +28,7 @@ function ShareTaskDialog(props) {
             props.setShareDialogVisible(false);
             setTask({
                 name: "",
-                id: props.data
+                id: props.data["_id"]
             });
         } else {
             props.showToast("error", "Error", "All fields must be filled in");
