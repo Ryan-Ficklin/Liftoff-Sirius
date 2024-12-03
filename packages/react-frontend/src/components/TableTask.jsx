@@ -23,8 +23,7 @@ function TableTask(props) {
             />
             <ShareTaskDialog
                 handleSubmit={props.shareTask}
-                // data={task["_id"]}
-                data={task._id}
+                data={task}
                 index={props.index}
                 shareDialogVisible={shareDialogVisible}
                 setShareDialogVisible={setShareDialogVisible}
