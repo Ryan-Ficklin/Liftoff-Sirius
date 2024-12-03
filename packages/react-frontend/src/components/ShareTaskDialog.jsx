@@ -72,7 +72,8 @@ ShareTaskDialog.propTypes = {
     handleSubmit: PropTypes.func.isRequired, // expects a function
     shareDialogVisible: PropTypes.bool.isRequired,
     setShareDialogVisible: PropTypes.func.isRequired,
-    showToast: PropTypes.func.isRequired
+    showToast: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired
 };
 
 export default ShareTaskDialog;
