@@ -269,7 +269,7 @@ function TasksPage({ addAuthHeader, showToast }) {
                 <img src={logo} className="logo"></img>
 
                 <div className="d-flex">
-                    <h2 className="title">My Tasks</h2>
+                    <h2 className="title">{localStorage.getItem("username")}'s Tasks</h2>
                     <button
                         className="add-btn"
                         onClick={() => setCreateDialogVisible(true)}>
