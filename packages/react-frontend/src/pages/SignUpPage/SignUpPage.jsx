@@ -78,7 +78,10 @@ function LoginPage({ showToast }) {
                         `The user ${username} was successfully created!`
                     );
                     let token = data["token"];
+                    // add new signed up user to local cache
+                    // also overwrites anything in the cache right now
                     localStorage.setItem("token", token);
+                    localStorage.setItem("username", username);
                     sendEmail();
                     navigate("/tasks");
                 })

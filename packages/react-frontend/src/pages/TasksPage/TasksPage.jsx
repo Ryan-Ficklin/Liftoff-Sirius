@@ -279,7 +279,9 @@ function TasksPage({ addAuthHeader, showToast }) {
                 <button
                     className="logout-btn"
                     onClick={() => {
+                        // remove cache on logout
                         localStorage.removeItem("token");
+                        localStorage.removeItem("username");
                         navigate("/login");
                     }}>
                     Logout

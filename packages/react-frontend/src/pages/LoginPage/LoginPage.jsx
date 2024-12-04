@@ -46,6 +46,7 @@ function LoginPage({ showToast }) {
                     if (data) {
                         console.log(data);
                         let token = data["token"];
+                        // should overwrite any exisiting data
                         localStorage.setItem("token", token);
                         localStorage.setItem("username", username);
                         navigate("/tasks");
