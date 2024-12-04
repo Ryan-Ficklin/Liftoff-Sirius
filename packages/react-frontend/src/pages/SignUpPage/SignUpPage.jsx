@@ -22,20 +22,21 @@ function LoginPage({ showToast }) {
             document.body.removeChild(script);
         };
     }, []);
-    
+
     const sendEmail = () => {
         window.Email.send({
             SecureToken: "476bb72c-c256-4a0d-b624-0cea4d2f9147",
 
-            To: email,      //this only works if you pay for it, but can send to the registered email 
+            To: email, //this only works if you pay for it, but can send to the registered email
             From: "sirius.noreply5@gmail.com",
             Subject: "Sirius Sign Up",
             Body: "Thanks for creating an account with Sirius!"
-        }).then((message) => {
-            console.log("Email sent response:", message);
-            alert("Successful email sent");
         })
-        .catch ((error) => console.error("Failed email send", error));
+            .then((message) => {
+                console.log("Email sent response:", message);
+                alert("Successful email sent");
+            })
+            .catch((error) => console.error("Failed email send", error));
     };
 
     function signup() {
@@ -99,7 +100,11 @@ function LoginPage({ showToast }) {
     return (
         <div className="body">
             <div className="d-flex justify-content-center login-section">
-                <form onSubmit= {(e) => {e.preventDefault(); signup();}}>
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        signup();
+                    }}>
                     <center>
                         <img src={logo} className="img" />
                     </center>

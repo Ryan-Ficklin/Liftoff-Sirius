@@ -168,7 +168,7 @@ describe("The Happy Path", () => {
             .closest(".TableTask") // find the closest parent task container
             .find('i[class="icon pi pi-pen-to-square"]') // find the edit button
             .click();
-        
+
         // clear the field so that it deletes the exisiting priority
         cy.get('input[name="priority"]').clear().type(testdata.task1_new_priority);
         cy.get('button[class="dialog-add-task-btn"]').click();

@@ -69,12 +69,12 @@
     border: 1px solid #147fff;
 }
 
-.icon{
+.icon {
     margin-right: 1rem;
     cursor: pointer;
     font-size: 17px;
 }
 
-.trash-icon:hover{
+.trash-icon:hover {
     color: rgb(223, 76, 76);
 }

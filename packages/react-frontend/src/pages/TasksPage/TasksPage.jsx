@@ -220,56 +220,13 @@ function TasksPage({ addAuthHeader, showToast }) {
                 setCreateDialogVisible={setCreateDialogVisible}
                 showToast={showToast}
             />
-
-            {/* <Dialog
-                header="Create Task"
-                visible={createDialogVisible}
-                style={{ width: "25vw" }}
-                className="create-task-dialog"
-                onHide={() => {
-                    if (!createDialogVisible) return;
-                    setCreateDialogVisible(false);
-                }}>
-                <div className="dialog-content-section">
-                    <p className="dialog-input-helper">Task name</p>
-                    <input
-                        className="dialog-input"
-                        placeholder="ie. Get TE 5 Finished"
-                        type="text"
-                        name="name"
-                        id="name"></input>
-
-                    <p className="dialog-input-helper">Task Description</p>
-                    <textarea
-                        className="dialog-input"
-                        placeholder="ie. Finish up the assignment"
-                        type="text"
-                        name="description"
-                        cols={3}
-                        id="description"></textarea>
-
-                    <p className="dialog-input-helper">Priority</p>
-                    <input
-                        className="dialog-input"
-                        placeholder="ie. 1,2,3"
-                        type="number"
-                        name="priority"
-                        id="priority"
-                        style={{ fontWeight: "bold", fontSize: "15px" }}></input>
-
-                    <p className="dialog-input-helper">Due Date</p>
-                    <Calendar value={dueDate} onChange={(e) => setDueDate(e.value)} className="calendar-input"/>
-
-                        <button className="dialog-add-task-btn">Add Task</button>
-
-                </div>
-            </Dialog> */}
-
             <div className="d-flex justify-content-between select">
                 <img src={logo} className="logo"></img>
 
                 <div className="d-flex">
-                    <h2 className="title">{localStorage.getItem("username")}'s Tasks</h2>
+                    <h2 className="title">
+                        {localStorage.getItem("username")}&apos;s Tasks
+                    </h2>
                     <button
                         className="add-btn"
                         onClick={() => setCreateDialogVisible(true)}>
