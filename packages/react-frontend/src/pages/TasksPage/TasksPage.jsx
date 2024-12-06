@@ -77,10 +77,6 @@ function TasksPage({ addAuthHeader, showToast }) {
     }
 
     function removeOneTask(index) {
-        /*const updated = tasks.filter((task, i) => {
-            return i !== index;
-        });*/
-        /*setTasks(updated);*/
 
         console.log(tasks);
         console.log(index);
@@ -100,7 +96,6 @@ function TasksPage({ addAuthHeader, showToast }) {
         ).then((res) => {
             console.log(res);
             if (res.status == 204) {
-                /*setTasks([...tasks, task]);*/
                 getUserTasks();
                 setCreateDialogVisible(false);
             } else {
@@ -145,7 +140,6 @@ function TasksPage({ addAuthHeader, showToast }) {
         ).then((res) => {
             console.log(res);
             if (res.status == 201) {
-                /*setTasks([...tasks, task]);*/
                 getUserTasks();
                 setCreateDialogVisible(false);
             } else {
@@ -334,8 +328,6 @@ function TasksPage({ addAuthHeader, showToast }) {
                                     date: x.due_date_time.split("T")[0],
                                     id: x._id
                                 }))
-                                /*{ title: 'Turn in TE 1 helloooooooooo', date: '2024-11-12', start: new Date('2024-11-12 20:00:00'), end: new Date('2024-11-13 01:00:00') },
-                                { title: 'event 2 turn in teeeeeee', date: '2024-11-13', start: new Date('2024-11-13 10:00:00')}*/
                             }
                         />
                     </div>

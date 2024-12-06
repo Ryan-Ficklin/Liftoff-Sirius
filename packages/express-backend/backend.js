@@ -20,9 +20,6 @@ if (mongoose.connection.readyState === 0) {
 } else {
     console.log("Already connected to MongoDB");
 }
-// mongoose
-//   .connect(MONGO_CONNECTION_STRING)
-//   .catch((error) => console.log(error));
 
 const app = express();
 const port = 8000;
@@ -48,8 +45,6 @@ app.use(express.json());
 
 app.get("/users", authenticateUser, async (req, res) => {
     const username = req.query.username;
-    // const password = req.query.password;
-    // const task_list = req.query.task_list;
     const email = req.query.email;
     try {
         const users = await userService.getUsers(username, email);
@@ -142,7 +137,6 @@ app.get("/events/:id", authenticateUser, async (req, res) => {
 
 app.post("/users", auth.authenticateUser, async (req, res) => {
     const userToAdd = req.body;
-    //const addedUser = addUser(userToAdd);
     try {
         const addedUser = await userService.addUser(userToAdd);
         res.status(201).json(addedUser);
@@ -191,9 +185,6 @@ app.post("/tasks/share", authenticateUser, async (req, res) => {
     } else if (!task) {
         res.status(404).send("Task not found, include task ID");
     } else {
-        //const other_user = userService.findUserByUsername(username);
-        // eventually make sure only owner of task can share task
-        // if (task_obj["owner"] == )
         const ret = await userService.addTaskIDToUser(username, task);
         res.status(201).json(ret);
     }
@@ -306,6 +297,5 @@ let months = [
 let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 app.listen(process.env.PORT || port, () => {
-    //console.log(`Example app listening at http://localhost:${port}`);
     console.log("Rest API is listening");
 });
