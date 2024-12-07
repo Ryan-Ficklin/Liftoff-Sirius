@@ -29,9 +29,7 @@ primereact (UI): https://primereact.org/
 Formatting/Prettier conventions
 https://github.com/Ryan-Ficklin/Liftoff-Sirius/blob/main/.prettierrc
 
-
-## CONTRIBUTING.md
-https://github.com/Ryan-Ficklin/Liftoff-Sirius/blob/main/CONTRIBUTING.md
+CONTRIBUTING.md: https://github.com/Ryan-Ficklin/Liftoff-Sirius/blob/main/CONTRIBUTING.md
 
 ## Docs Folder
 https://github.com/Ryan-Ficklin/Liftoff-Sirius/tree/main/docs
