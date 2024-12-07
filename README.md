@@ -33,5 +33,8 @@ https://github.com/Ryan-Ficklin/Liftoff-Sirius/blob/main/.prettierrc
 ## CONTRIBUTING.md
 https://github.com/Ryan-Ficklin/Liftoff-Sirius/blob/main/CONTRIBUTING.md
 
+## Docs Folder
+https://github.com/Ryan-Ficklin/Liftoff-Sirius/tree/main/docs
+
 
 ### Video Demo of Live Build: https://drive.google.com/file/d/1kUbEAfQ5gxHgnRI_adpOaOlBxqCqbhEn/view?usp=sharing
