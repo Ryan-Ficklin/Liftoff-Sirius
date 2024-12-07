@@ -15,11 +15,14 @@ https://www.figma.com/proto/j9k0efxtsowsy11xtCFHoK/Sirius---Liftoff?node-id=2-2&
 ## Architecture
 
 Frontend Framework: react.js
+
 Backend: express (node.js)
+
 Database: mongoose/mongoDB
 
 ### Package Libraries
 fullcalendar (Calendar): https://fullcalendar.io/
+
 primereact (UI): https://primereact.org/
  
 ## Development Environment Setup
